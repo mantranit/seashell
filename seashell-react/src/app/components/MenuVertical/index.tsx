@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import MenuItem from "../MenuItem";
+import iconTv from "../../../assets/icons/icon-tv.svg?inline";
+
+const menu = [
+  {
+    id: "tv",
+    icon: iconTv,
+    text: "Television",
+    path: "/television",
+  },
+  {
+    id: "tv",
+    icon: iconTv,
+    text: "Television",
+    path: "/television",
+  },
+];
 
 function MenuVertical() {
-  const [count, setCount] = useState(0);
-  const navigate = useNavigate();
   const [currentMenuItem, setCurrentMenuItem] = useState("application");
 
   const handleKeyDown = (event: any) => {
@@ -27,12 +40,18 @@ function MenuVertical() {
   return (
     <div className="menu-container">
       <div className="menu-wrapper">
-        <MenuItem
-          icon="application"
-          text="Application"
-          path="/application"
-          isActive={currentMenuItem === "application"}
-        />
+        {menu.map((item) => {
+          return (
+            <MenuItem
+              key={item.id}
+              id={item.id}
+              icon={item.icon}
+              text={item.text}
+              path={item.path}
+              isActive={currentMenuItem === item.id}
+            />
+          );
+        })}
       </div>
     </div>
   );
