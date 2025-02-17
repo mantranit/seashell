@@ -27,7 +27,7 @@
     .menu-scroller {
       display: flex;
       flex-wrap: nowrap;
-      transition: transform 0.1s cubic-bezier();
+      transition: all 0.2s linear;
     }
   }
 }

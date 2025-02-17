@@ -3,6 +3,7 @@ import MenuItem from "../MenuItem";
 import "./style.scss";
 import iconBack from "../../../assets/icons/btn_arrow_left.png";
 import iconNext from "../../../assets/icons/btn_arrow_right.png";
+import { useNavigate } from "react-router";
 
 const itemWidth = (1280 - 100) / 5;
 const menu = [
@@ -319,6 +320,7 @@ function MenuVertical() {
   const [currentMenuItem, setCurrentMenuItem] = useState(0);
   const [currentSlider, setCurrentSlider] = useState(0);
   const [cursor, setCursor] = useState(0);
+  const navigate = useNavigate();
 
   const handleKeyDown = (event: any) => {
     let keycode;
@@ -358,6 +360,9 @@ function MenuVertical() {
           return cursor - 1;
         }
       });
+    } else if (keycode === 13) {
+      const currentItem = menu[currentMenuItem];
+      navigate(currentItem.path);
     }
   };
 
