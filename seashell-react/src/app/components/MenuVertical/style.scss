@@ -1,0 +1,33 @@
+.menu-container {
+  position: absolute;
+  padding: 0 50px;
+  width: 100%;
+  left: 0;
+  bottom: 16px;
+  .navigate {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 60px;
+    &.back {
+      left: 0;
+    }
+    &.next {
+      right: 0;
+    }
+    &.disabled {
+      opacity: 0.2;
+    }
+  }
+  .menu-wrapper {
+    overflow: hidden;
+    .menu-scroller {
+      display: flex;
+      flex-wrap: nowrap;
+      transition: transform 0.1s cubic-bezier();
+    }
+  }
+}

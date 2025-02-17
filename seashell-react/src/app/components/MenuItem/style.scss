@@ -1,5 +1,48 @@
+@keyframes tv_cur_live {
+  from {
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
 .menu-item {
+  display: flex;
+  flex: 0 0 220px;
+  position: relative;
+  align-items: center;
+  padding: 15px;
+  &.active {
+    padding: 12px;
+    a {
+      border: 3px solid #2459ab;
+      animation: tv_cur_live 2s ease-in-out infinite alternate;
+    }
+  }
   a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 20px;
+    padding-top: 20px;
+    .icon {
+      width: 130px;
+      height: 130px;
+      display: inline-block;
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: white;
+      }
+    }
+    .text {
+      margin-top: 5px;
+    }
   }
 }

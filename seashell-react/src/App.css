@@ -6,4 +6,7 @@
 .page {
   width: 1280px;
   height: 720px;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
 }
