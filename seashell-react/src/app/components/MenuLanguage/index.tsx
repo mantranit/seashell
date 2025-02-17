@@ -1,16 +1,8 @@
 import { Link } from "react-router";
 import "./style.scss";
-import { ReactNode } from "react";
+import { t } from "i18next";
 
-type TMenuItemProps = {
-  icon: ReactNode;
-  path: string;
-  text: string;
-  isActive: boolean;
-  width: number;
-};
-
-function MenuItem({ icon, path, text, isActive, width }: TMenuItemProps) {
+function MenuLanguage() {
   return (
     <div
       className={`menu-item ${isActive ? "active" : ""}`}
@@ -19,11 +11,11 @@ function MenuItem({ icon, path, text, isActive, width }: TMenuItemProps) {
       <Link to={path}>
         <div className="icon">{icon}</div>
         <div className="text">
-          <span>{text}</span>
+          <span>{t(`menu.${text}`)}</span>
         </div>
       </Link>
     </div>
   );
 }
 
-export default MenuItem;
+export default MenuLanguage;
