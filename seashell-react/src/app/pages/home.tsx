@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "../../assets/react.svg?inline";
 import viteLogo from "../../assets/vite.svg?inline";
 import MenuVertical from "../components/MenuVertical";
+import MenuLanguage from "../components/MenuLanguage";
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -28,6 +29,7 @@ function Home() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <MenuLanguage />
       <MenuVertical />
     </div>
   );

@@ -1,6 +1,7 @@
 import { HashRouter, Route, Routes } from "react-router";
 import "./App.css";
 import MainLayout from "./app/layouts/main";
+import Welcome from "./app/pages/welcome";
 import Home from "./app/pages/home";
 import Settings from "./app/pages/settings";
 import RestaurantsBars from "./app/pages/restaurants-bars";
@@ -25,7 +26,8 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Welcome />} />
+          <Route path="home" element={<Home />} />
           <Route path="television" element={<Television />} />
           <Route path="connectivity" element={<Connectivity />} />
           <Route path="dining" element={<Dining />} />

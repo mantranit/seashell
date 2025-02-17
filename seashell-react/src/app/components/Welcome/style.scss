@@ -1,0 +1,30 @@
+.welcome-wrapper {
+  position: absolute;
+  left: 30px;
+  bottom: 50px;
+  width: 53%;
+  font-size: 25px;
+  h1 {
+    font-size: 50px;
+    font-weight: normal;
+    margin: 0 0 12px;
+  }
+  .welcome {
+    margin: 0 0 30px;
+    p {
+      margin: 0;
+    }
+  }
+  a {
+    display: inline-block;
+    width: 450px;
+    height: 60px;
+    line-height: 53px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    border: 3px solid #2459ab;
+    animation: tv_cur_live 2s ease-in-out infinite alternate;
+    border-radius: 10px;
+  }
+}
