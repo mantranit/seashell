@@ -1,7 +1,10 @@
 .menu-language-wrapper {
   position: absolute;
   right: 30px;
-  bottom: 270px;
+  bottom: 20px;
+  .home-page & {
+    bottom: 270px;
+  }
   .welcome-page & {
     bottom: 60px;
   }
