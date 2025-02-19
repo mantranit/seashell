@@ -30,6 +30,12 @@ i18n.use(initReactI18next).init({
           Settings: "Settings",
           Language: "Language",
         },
+        welcome: {
+          Dear: "DEAR",
+          Brief:
+            "We are delighted that you have chosen our hotel. On behalf of the entire team of the SEASHELLS, I extend a very warm welcome to you and trust that your stay with us will be pleasant and comfortable.",
+          Continue: "Continue",
+        },
       },
     },
     vi: {
@@ -53,6 +59,12 @@ i18n.use(initReactI18next).init({
           "Flight Info": "Flight Info",
           Settings: "Settings",
           Language: "Language",
+        },
+        welcome: {
+          Dear: "DEAR",
+          Brief:
+            "We are delighted that you have chosen our hotel. On behalf of the entire team of the SEASHELLS, I extend a very warm welcome to you and trust that your stay with us will be pleasant and comfortable.",
+          Continue: "Continue",
         },
       },
     },

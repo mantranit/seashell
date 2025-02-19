@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router";
 import Header from "../components/Header";
 import "./style.scss";
 import { useEffect } from "react";
+import { keyboard } from "../keyboard";
 
 export default function MainLayout() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function MainLayout() {
       keycode = event.which;
     }
 
-    if (keycode === 8) {
+    if (keycode === keyboard.BACK) {
       navigate(-1);
     }
   };

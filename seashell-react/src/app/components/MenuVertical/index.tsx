@@ -5,6 +5,7 @@ import iconNext from "../../../assets/icons/btn_arrow_right.png";
 import { Link, useNavigate } from "react-router";
 import { t } from "i18next";
 import { menu } from "./menu";
+import { keyboard } from "../../keyboard";
 
 type TMenuItemProps = {
   icon: ReactNode;
@@ -47,7 +48,7 @@ function MenuVertical() {
       keycode = event.which;
     }
 
-    if (keycode === 39) {
+    if (keycode === keyboard.RIGHT) {
       let nextIndex = currentIndex + 1;
       if (nextIndex >= menu.length) {
         nextIndex = currentIndex;
@@ -66,7 +67,7 @@ function MenuVertical() {
           return cursor + 1;
         }
       });
-    } else if (keycode === 37) {
+    } else if (keycode === keyboard.LEFT) {
       let backIndex = currentIndex - 1;
       if (backIndex <= -1) {
         backIndex = currentIndex;
@@ -80,7 +81,7 @@ function MenuVertical() {
           return cursor - 1;
         }
       });
-    } else if (keycode === 13) {
+    } else if (keycode === keyboard.ENTER) {
       const currentItem = menu[currentIndex];
       navigate(currentItem.path);
     }

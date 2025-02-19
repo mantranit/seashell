@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import "./style.scss";
 import { t } from "i18next";
 import { useEffect } from "react";
+import { keyboard } from "../../keyboard";
 
 const menu = [
   {
@@ -26,9 +27,9 @@ function MenuLanguage() {
       keycode = event.which;
     }
 
-    if (keycode === 81) {
+    if (keycode === keyboard.BUTTON_BLUE) {
       nagivate("/settings/language");
-    } else if (keycode === 82) {
+    } else if (keycode === keyboard.BUTTON_RED) {
       nagivate("/television");
     }
   };

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import "./style.scss";
 import { t } from "i18next";
 import { useEffect } from "react";
+import { keyboard } from "../../keyboard";
 
 function Welcome() {
   const nagivate = useNavigate();
@@ -13,7 +14,7 @@ function Welcome() {
       keycode = event.which;
     }
 
-    if (keycode === 13) {
+    if (keycode === keyboard.ENTER) {
       nagivate("/home");
     }
   };
@@ -28,18 +29,13 @@ function Welcome() {
   return (
     <div className="welcome-wrapper">
       <h1>
-        DEAR, <strong>MR TUAN LE</strong>
+        {t("welcome.Dear")}, <strong>MR. TUAN LE</strong>
       </h1>
       <div className="welcome">
-        <p>
-          We are delighted that you have chosen our hotel. <br />
-          On behalf of the entire team of the SEASHELLS, I extend a very warm
-          welcome to you and trust that your stay with us will be pleasant and
-          comfortable.
-        </p>
+        <p>{t("welcome.Brief")}</p>
       </div>
       <div className="button-continue">
-        <Link to="/home">Continue</Link>
+        <Link to="/home">{t("welcome.Continue")}</Link>
       </div>
     </div>
   );
