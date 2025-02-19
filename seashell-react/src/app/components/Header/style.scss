@@ -1,12 +1,39 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .header {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
+  .logo {
+    padding: 20px 24px;
+    img {
+      height: 48px;
+    }
+  }
   .generalInfo {
     display: flex;
     align-items: center;
+    font-size: 23px;
+    gap: 20px;
+    padding-right: 30px;
+    margin-top: -16px;
+    sup {
+      line-height: 1;
+    }
+    .clock {
+      span {
+        animation: fadeIn 500ms ease-in alternate infinite;
+      }
+    }
   }
 }

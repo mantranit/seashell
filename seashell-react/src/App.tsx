@@ -21,7 +21,11 @@ import Feedback from "./app/pages/feedback";
 import CheckBill from "./app/pages/check-bill";
 import Flights from "./app/pages/flights";
 
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
 function App() {
+  dayjs.extend(localizedFormat);
   return (
     <HashRouter>
       <Routes>

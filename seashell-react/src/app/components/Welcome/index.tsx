@@ -29,7 +29,7 @@ function Welcome() {
   return (
     <div className="welcome-wrapper">
       <h1>
-        {t("welcome.Dear")}, <strong>MR. TUAN LE</strong>
+        {t("welcome.Dear")}, <strong>MR. Tuấn Lê</strong>
       </h1>
       <div className="welcome">
         <p>{t("welcome.Brief")}</p>

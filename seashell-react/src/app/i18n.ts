@@ -10,6 +10,10 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        header: {
+          Welcome: "Welcome, {{name}}",
+          Room: "Room {{roomNumber}}",
+        },
         menu: {
           Television: "Television",
           Connectivity: "Connectivity",
@@ -40,6 +44,10 @@ i18n.use(initReactI18next).init({
     },
     vi: {
       translation: {
+        header: {
+          Welcome: "Welcome",
+          Room: "Room",
+        },
         menu: {
           Television: "Tivi",
           Connectivity: "Kết nối thiết bị",

@@ -1,10 +1,11 @@
 import MenuLanguage from "../components/MenuLanguage";
+import { VideoBackground } from "../components/VideoBackground";
 import Welcome from "../components/Welcome";
 
 function WelcomeScreen() {
   return (
     <div className="page welcome-page">
-      <div className="header"></div>
+      <VideoBackground />
       <Welcome />
       <MenuLanguage />
     </div>
