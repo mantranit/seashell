@@ -3,7 +3,7 @@ import logo from "../../../assets/logo_white.png";
 import { t } from "i18next";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { Clock } from "./clock";
+import { IconClock } from "./icon-clock";
 
 function Header() {
   const name = "Mr Tuấn Lê";
@@ -28,7 +28,7 @@ function Header() {
         </div>
         <div className="clock-area">
           <span className="icon">
-            <Clock />
+            <IconClock />
           </span>
           <span>
             {today.format("HH")}
