@@ -30,8 +30,15 @@
     sup {
       line-height: 1;
     }
-    .clock {
-      span {
+    .clock-area {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      .icon {
+        width: 24px;
+        transform: translateY(3px);
+      }
+      .separate {
         animation: fadeIn 500ms ease-in alternate infinite;
       }
     }
