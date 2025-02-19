@@ -1,4 +1,5 @@
 import "./style.scss";
+import background from "../../../assets/icons/shadow.png";
 
 export const VideoBackground = () => {
   return (
@@ -10,6 +11,10 @@ export const VideoBackground = () => {
         />
         Your browser does not support the video tag.
       </video>
+      <div
+        className="overlay"
+        style={{ background: `url(${background})` }}
+      ></div>
     </div>
   );
 };

@@ -33,6 +33,7 @@ i18n.use(initReactI18next).init({
           "Flight Info": "Flight Info",
           Settings: "Settings",
           Language: "Language",
+          Back: "Back",
         },
         welcome: {
           Dear: "DEAR",
