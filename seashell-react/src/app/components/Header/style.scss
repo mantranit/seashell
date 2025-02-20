@@ -1,4 +1,4 @@
-@keyframes fadeIn {
+@keyframes tiktak {
   0% {
     opacity: 0;
   }
@@ -39,7 +39,7 @@
         transform: translateY(3px);
       }
       .separate {
-        animation: fadeIn 500ms ease-in alternate infinite;
+        animation: tiktak 500ms ease-in alternate infinite;
       }
     }
   }

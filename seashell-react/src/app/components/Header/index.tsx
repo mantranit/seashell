@@ -31,7 +31,7 @@ function Header() {
             <IconClock />
           </span>
           <span>
-            {today.format("HH")}
+            {today.format("H")}
             <span className="separate">:</span>
             {today.format("mm")}
           </span>

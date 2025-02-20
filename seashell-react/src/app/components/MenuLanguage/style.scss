@@ -4,9 +4,11 @@
   bottom: 22px;
   .home-page & {
     bottom: 270px;
+    animation: slideUp 0.3s ease-in 1;
   }
   .welcome-page & {
     bottom: 60px;
+    animation: fadeIn 0.3s ease-in 1;
   }
   .menu-language {
     display: flex;

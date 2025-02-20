@@ -5,7 +5,7 @@ import { VideoBackground } from "../components/VideoBackground";
 function Home() {
   return (
     <div className="page home-page">
-      <VideoBackground />
+      <VideoBackground enabledCover={true} />
       <MenuLanguage />
       <MenuVertical />
     </div>

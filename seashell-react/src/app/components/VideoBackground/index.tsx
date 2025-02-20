@@ -1,7 +1,13 @@
 import "./style.scss";
 import background from "../../../assets/icons/shadow.png";
 
-export const VideoBackground = () => {
+type TVideoBackgroundProps = {
+  enabledCover?: boolean;
+};
+
+export const VideoBackground = ({
+  enabledCover = false,
+}: TVideoBackgroundProps) => {
   return (
     <div className="video-background">
       <video autoPlay={true} loop={true} muted={true} controls={false}>
@@ -11,10 +17,9 @@ export const VideoBackground = () => {
         />
         Your browser does not support the video tag.
       </video>
-      <div
-        className="overlay"
-        style={{ background: `url(${background})` }}
-      ></div>
+      {enabledCover && (
+        <div className="overlay" style={{ background: `url(${background})` }} />
+      )}
     </div>
   );
 };
