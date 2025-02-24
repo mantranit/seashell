@@ -9,24 +9,52 @@
     width: 860px;
     height: 452px;
     margin: 0 auto;
-    overflow: hidden scroll;
-    padding-right: 20px;
-    &::-webkit-scrollbar-track {
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+    overflow: hidden;
+    padding: 3px 37px 3px 3px;
+    position: relative;
+    // &::-webkit-scrollbar-track {
+    //   border-radius: 10px;
+    //   background-color: rgba(255, 255, 255, 0.1);
+    // }
 
-    &::-webkit-scrollbar {
+    // &::-webkit-scrollbar {
+    //   width: 10px;
+    //   background-color: transparent;
+    // }
+
+    // &::-webkit-scrollbar-thumb {
+    //   border-radius: 10px;
+    //   background-color: rgba(255, 255, 255, 0.1);
+    // }
+    .category-scroller {
+      position: absolute;
       width: 10px;
-      background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
+      height: 100%;
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.1);
+      right: 0;
+      top: 0;
+      div {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        width: 10px;
+        height: 50px;
+        transition: all 0.3 ease-in;
+      }
+    }
+    .category-cursor {
+      position: absolute;
+      width: 406px;
+      height: 169px;
+      border: 3px solid #2459ab;
+      animation: tv_cur_live 2s ease-in-out infinite alternate;
+      z-index: 5;
+      margin: -3px 0 0 -3px;
+      transition: all 0.3 ease-in;
     }
     .category-list {
       margin: -10px;
+      overflow: hidden;
     }
   }
 }
@@ -36,6 +64,9 @@
   padding: 10px;
   a {
     display: block;
+    width: 400px;
+    height: 163px;
+    overflow: hidden;
     position: relative;
     color: white;
     line-height: 1;
