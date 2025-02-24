@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router";
 import "./App.css";
 import MainLayout from "./app/layouts/main";
 import Welcome from "./app/pages/welcome";
@@ -27,7 +27,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 function App() {
   dayjs.extend(localizedFormat);
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Welcome />} />
@@ -51,7 +51,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

@@ -8,6 +8,7 @@ function WelcomeScreen() {
       <VideoBackground />
       <Welcome />
       <MenuLanguage />
+      <div className="cover" />
     </div>
   );
 }

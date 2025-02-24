@@ -36,6 +36,9 @@
 *::before {
   box-sizing: border-box;
 }
+img {
+  width: 100%;
+}
 a {
   color: #646cff;
   text-decoration: inherit;
