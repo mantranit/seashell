@@ -8,18 +8,16 @@ type TCategory = {
   list: any[];
 };
 
-const itemWidth = 400;
-const itemHeight = 163;
+const itemWidth = 390;
+const itemHeight = 158;
 
 function Category({ title, list }: TCategory) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSlider, setCurrentSlider] = useState(0);
-  const [cursor, setCursor] = useState(0);
-  const navigate = useNavigate();
-  const trackRef = useRef<HTMLDivElement>(null);
   const [heightTrack, setHeightTrack] = useState(100);
-  const [translateWidth, setTranslateWidth] = useState(0);
-  const [translateHeight, setTranslateHeight] = useState(0);
+  const [translateWidth, setTranslateWidth] = useState(10);
+  const [translateHeight, setTranslateHeight] = useState(10);
+  const [translatePanelHeight, setTranslatePanelHeight] = useState(-10);
+  const [cursorX, setCursorX] = useState(0);
+  const [cursorY, setCursorY] = useState(0);
   const [showThumb, setShowThumb] = useState(false);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -33,21 +31,21 @@ function Category({ title, list }: TCategory) {
     }
 
     if (keycode === keyboard.RIGHT) {
-      if (translateWidth < itemWidth + 20) {
-        setTranslateWidth(translateWidth + (itemWidth + 20));
-      }
+      setCursorX((currenValue) => {
+        return Math.min(currenValue + 1, 1);
+      });
     } else if (keycode === keyboard.LEFT) {
-      if (translateWidth > 0) {
-        setTranslateWidth(translateWidth - (itemWidth + 20));
-      }
+      setCursorX((currenValue) => {
+        return Math.max(0, currenValue - 1);
+      });
     } else if (keycode === keyboard.TOP) {
-      if (translateHeight > 0) {
-        setTranslateHeight(translateHeight - (itemHeight + 20));
-      }
+      setCursorY((currenValue) => {
+        return Math.max(0, currenValue - 1);
+      });
     } else if (keycode === keyboard.BOTTOM) {
-      if (translateHeight < 452 - itemHeight - 20) {
-        setTranslateHeight(translateHeight + (itemHeight + 20));
-      }
+      setCursorY((currenValue) => {
+        return Math.min(currenValue + 1, Math.ceil((list.length - 1) / 2));
+      });
     } else if (keycode === keyboard.ENTER) {
     }
   };
@@ -76,6 +74,9 @@ function Category({ title, list }: TCategory) {
     calculateScroller();
   }, []);
 
+  console.log(cursorX, cursorY);
+  const translateCursorX = cursorX * (itemWidth + 20) + 10;
+  const translateCursorY = cursorY * (itemHeight + 20);
   return (
     <div className="category-wrapper">
       <h2>{title}</h2>
@@ -89,10 +90,16 @@ function Category({ title, list }: TCategory) {
         <div
           className="category-cursor"
           style={{
-            transform: `translate(${translateWidth}px, ${translateHeight}px)`,
+            width: itemWidth + 6,
+            height: itemHeight + 6,
+            transform: `translate(${translateCursorX}px, ${translateCursorY}px)`,
           }}
         />
-        <div className="category-list" ref={innerRef}>
+        <div
+          className="category-list"
+          ref={innerRef}
+          style={{ transform: `translateY(${translatePanelHeight}px)` }}
+        >
           {list.map((item) => {
             return (
               <div className="category-item" key={item.title}>
