@@ -36,8 +36,8 @@ const itemWidth = (1280 - 100) / totalItemShowed;
 
 function MenuVertical() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentSlider, setCurrentSlider] = useState(0);
   const [cursor, setCursor] = useState(0);
+  const [currentSlider, setCurrentSlider] = useState(0);
   const navigate = useNavigate();
 
   const handleKeyDown = (event: any) => {
@@ -49,13 +49,15 @@ function MenuVertical() {
     }
 
     if (keycode === keyboard.RIGHT) {
-      let nextIndex = currentIndex + 1;
-      if (nextIndex >= menu.length) {
-        nextIndex = currentIndex;
-      }
-      setCurrentIndex(() => nextIndex);
-      setCursor(() => {
-        if (cursor + 1 > totalItemShowed - 1) {
+      setCurrentIndex((currentIndex) => {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= menu.length) {
+          nextIndex = currentIndex;
+        }
+        return nextIndex;
+      });
+      setCursor((currentCursor) => {
+        if (currentCursor + 1 > totalItemShowed - 1) {
           setCurrentSlider(
             Math.max(
               currentSlider - itemWidth,
@@ -64,21 +66,23 @@ function MenuVertical() {
           );
           return totalItemShowed - 1;
         } else {
-          return cursor + 1;
+          return currentCursor + 1;
         }
       });
     } else if (keycode === keyboard.LEFT) {
-      let backIndex = currentIndex - 1;
-      if (backIndex <= -1) {
-        backIndex = currentIndex;
-      }
-      setCurrentIndex(() => backIndex);
-      setCursor(() => {
-        if (cursor - 1 < 0) {
+      setCurrentIndex((currentIndex) => {
+        let backIndex = currentIndex - 1;
+        if (backIndex <= -1) {
+          backIndex = currentIndex;
+        }
+        return backIndex;
+      });
+      setCursor((currentCursor) => {
+        if (currentCursor - 1 < 0) {
           setCurrentSlider(Math.min(currentSlider + itemWidth, 0));
           return 0;
         } else {
-          return cursor - 1;
+          return currentCursor - 1;
         }
       });
     } else if (keycode === keyboard.ENTER) {
@@ -116,7 +120,7 @@ function MenuVertical() {
           style={{
             width: `${itemWidth}px`,
             height: `${itemWidth}px`,
-            transform: `translateX(${cursor * itemWidth}px)`,
+            transform: `translate(${cursor * itemWidth}px, 0)`,
           }}
         >
           <div>&nbsp;</div>

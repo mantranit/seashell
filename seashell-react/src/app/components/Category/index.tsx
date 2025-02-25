@@ -10,12 +10,11 @@ type TCategory = {
 
 const itemWidth = 390;
 const itemHeight = 158;
+const itemInARow = 2;
+const heightThumb = 452;
 
 function Category({ title, list }: TCategory) {
   const [heightTrack, setHeightTrack] = useState(100);
-  const [translateWidth, setTranslateWidth] = useState(10);
-  const [translateHeight, setTranslateHeight] = useState(10);
-  const [translatePanelHeight, setTranslatePanelHeight] = useState(-10);
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
   const [showThumb, setShowThumb] = useState(false);
@@ -32,7 +31,7 @@ function Category({ title, list }: TCategory) {
 
     if (keycode === keyboard.RIGHT) {
       setCursorX((currenValue) => {
-        return Math.min(currenValue + 1, 1);
+        return Math.min(currenValue + 1, itemInARow - 1);
       });
     } else if (keycode === keyboard.LEFT) {
       setCursorX((currenValue) => {
@@ -58,15 +57,13 @@ function Category({ title, list }: TCategory) {
   });
 
   const calculateScroller = () => {
-    if (outerRef.current && innerRef.current) {
+    if (outerRef?.current && innerRef?.current) {
       const { height: outerHeight } = outerRef.current.getBoundingClientRect();
       const { height: innerHeight } = innerRef.current.getBoundingClientRect();
       if (outerHeight < innerHeight) {
         setShowThumb(true);
-        setHeightTrack((outerHeight / innerHeight) * 100);
+        setHeightTrack((outerHeight / innerHeight) * heightThumb);
       }
-      console.log("outerRef.current", outerRef.current.getBoundingClientRect());
-      console.log("innerRef.current", innerRef.current.getBoundingClientRect());
     }
   };
 
@@ -76,7 +73,16 @@ function Category({ title, list }: TCategory) {
 
   console.log(cursorX, cursorY);
   const translateCursorX = cursorX * (itemWidth + 20) + 10;
-  const translateCursorY = cursorY * (itemHeight + 20);
+  const translateCursorY = Math.min(
+    heightThumb - itemHeight - 6,
+    cursorY * (itemHeight + 20)
+  );
+  let translateTrackY =
+    (cursorY / Math.ceil((list.length - 1) / 2)) * heightThumb - heightTrack;
+  const translatePanelY =
+    -((cursorY - 1) * (itemHeight + 20)) +
+    (heightThumb - 2 * (itemHeight + 20)) +
+    4;
   return (
     <div className="category-wrapper">
       <h2>{title}</h2>
@@ -85,7 +91,12 @@ function Category({ title, list }: TCategory) {
           className="category-scroller"
           style={{ display: showThumb ? "block" : "none" }}
         >
-          <div style={{ height: `${heightTrack}%` }} />
+          <div
+            style={{
+              height: `${heightTrack}px`,
+              transform: `translate(0, ${Math.max(0, translateTrackY)}px)`,
+            }}
+          />
         </div>
         <div
           className="category-cursor"
@@ -98,7 +109,9 @@ function Category({ title, list }: TCategory) {
         <div
           className="category-list"
           ref={innerRef}
-          style={{ transform: `translateY(${translatePanelHeight}px)` }}
+          style={{
+            transform: `translate(0, ${Math.min(-10, translatePanelY)}px)`,
+          }}
         >
           {list.map((item) => {
             return (

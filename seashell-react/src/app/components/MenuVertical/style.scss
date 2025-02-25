@@ -36,6 +36,7 @@
       top: 0;
       padding: 12px;
       z-index: 1;
+      animation: all 0.2s ease-in;
       div {
         height: 100%;
         border: 3px solid #2459ab;
@@ -45,7 +46,7 @@
     .menu-scroller {
       display: flex;
       flex-wrap: nowrap;
-      transition: all 0.2s linear;
+      transition: all 0.2s ease-in;
       margin-left: -13px;
     }
   }
