@@ -49,7 +49,7 @@ function LeftBottomButtons({ showNavigation }: TLeftBottomButtonsProps) {
               </g>
             </svg>
           </span>
-          {t("menu.Back")}
+          {t("Back")}
         </button>
         {showNavigation && (
           <button>
@@ -65,7 +65,7 @@ function LeftBottomButtons({ showNavigation }: TLeftBottomButtonsProps) {
                 </g>
               </svg>
             </span>
-            {t("menu.Navigation")}
+            {t("Navigation")}
           </button>
         )}
       </div>

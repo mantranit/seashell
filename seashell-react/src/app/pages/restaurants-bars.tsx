@@ -38,7 +38,7 @@ function RestaurantsBars() {
   ]);
   return (
     <div className="page restaurants-bars-page">
-      <Category title={t("menu.Restaurants & Bars")} list={list} />
+      <Category title={t("Restaurants & Bars")} list={list} />
       <RightBottomButtons />
       <LeftBottomButtons showNavigation={true} />
     </div>

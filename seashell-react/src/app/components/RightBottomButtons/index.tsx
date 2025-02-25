@@ -49,7 +49,7 @@ function RightBottomButtons() {
             <Link to={item.path} key={item.path}>
               <div className="icon" style={{ backgroundColor: item.color }} />
               <div className="text">
-                <span>{t(`menu.${item.text}`)}</span>
+                <span>{t(`${item.text}`)}</span>
               </div>
             </Link>
           );

@@ -3,7 +3,7 @@ import "./style.scss";
 import { useEffect, useRef, useState } from "react";
 import { keyboard } from "../../keyboard";
 
-type TCategoryProps = {
+type TSubCategoryProps = {
   title: string;
   list: any[];
 };
@@ -15,7 +15,7 @@ const heightThumb = 452;
 const borderCursorWith = 3;
 const gap = 20;
 
-function Category({ title, list }: TCategoryProps) {
+function SubCategory({ title, list }: TSubCategoryProps) {
   const navigate = useNavigate();
   const [heightTrack, setHeightTrack] = useState(100);
   const [cursorX, setCursorX] = useState(0);
@@ -94,11 +94,11 @@ function Category({ title, list }: TCategoryProps) {
     (borderCursorWith + 1);
 
   return (
-    <div className="category-wrapper">
+    <div className="sub-category-wrapper">
       <h2>{title}</h2>
-      <div className="category-content" ref={outerRef}>
+      <div className="sub-category-content" ref={outerRef}>
         <div
-          className="category-scroller"
+          className="sub-category-scroller"
           style={{ display: showThumb ? "block" : "none" }}
         >
           <div
@@ -109,7 +109,7 @@ function Category({ title, list }: TCategoryProps) {
           />
         </div>
         <div
-          className="category-cursor"
+          className="sub-category-cursor"
           style={{
             width: itemWidth + borderCursorWith * 2,
             height: itemHeight + borderCursorWith * 2,
@@ -117,7 +117,7 @@ function Category({ title, list }: TCategoryProps) {
           }}
         />
         <div
-          className="category-list"
+          className="sub-category-list"
           ref={innerRef}
           style={{
             transform: `translate(0, ${Math.min(
@@ -128,7 +128,7 @@ function Category({ title, list }: TCategoryProps) {
         >
           {list.map((item) => {
             return (
-              <div className="category-item" key={item.title}>
+              <div className="sub-category-item" key={item.title}>
                 <Link
                   to={item.path}
                   style={{ width: itemWidth, height: itemHeight }}
@@ -150,4 +150,4 @@ function Category({ title, list }: TCategoryProps) {
   );
 }
 
-export default Category;
+export default SubCategory;

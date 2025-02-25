@@ -24,7 +24,7 @@ function MenuItem({ icon, path, text, isActive, width }: TMenuItemProps) {
       <Link to={path}>
         <div className="icon">{icon}</div>
         <div className="text">
-          <span>{t(`menu.${text}`)}</span>
+          <span>{t(`${text}`)}</span>
         </div>
       </Link>
     </div>
