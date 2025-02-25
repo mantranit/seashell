@@ -53,6 +53,12 @@ function Category({ title, list }: TCategory) {
   };
 
   useEffect(() => {
+    if (!list[cursorX + cursorY * 2]) {
+      setCursorX(cursorX - 1);
+    }
+  }, [cursorX, cursorY]);
+
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
