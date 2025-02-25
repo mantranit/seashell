@@ -14,6 +14,7 @@ const itemInARow = 2;
 const heightThumb = 452;
 
 function Category({ title, list }: TCategory) {
+  const navigate = useNavigate();
   const [heightTrack, setHeightTrack] = useState(100);
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
@@ -46,6 +47,8 @@ function Category({ title, list }: TCategory) {
         return Math.min(currenValue + 1, Math.ceil((list.length - 1) / 2));
       });
     } else if (keycode === keyboard.ENTER) {
+      const currentItem = list[cursorX + cursorY * 2];
+      navigate(currentItem.path);
     }
   };
 
@@ -71,7 +74,6 @@ function Category({ title, list }: TCategory) {
     calculateScroller();
   }, []);
 
-  console.log(cursorX, cursorY);
   const translateCursorX = cursorX * (itemWidth + 20) + 10;
   const translateCursorY = Math.min(
     heightThumb - itemHeight - 6,
@@ -83,6 +85,7 @@ function Category({ title, list }: TCategory) {
     -((cursorY - 1) * (itemHeight + 20)) +
     (heightThumb - 2 * (itemHeight + 20)) +
     4;
+
   return (
     <div className="category-wrapper">
       <h2>{title}</h2>
