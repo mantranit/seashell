@@ -53,19 +53,14 @@ function Category({ title, list }: TCategory) {
   };
 
   useEffect(() => {
-    if (!list[cursorX + cursorY * 2]) {
-      setCursorX(cursorX - 1);
-    }
-  }, [cursorX, cursorY]);
-
-  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, []);
 
-  const calculateScroller = () => {
+  // calculateScroller
+  useEffect(() => {
     if (outerRef?.current && innerRef?.current) {
       const { height: outerHeight } = outerRef.current.getBoundingClientRect();
       const { height: innerHeight } = innerRef.current.getBoundingClientRect();
@@ -74,11 +69,13 @@ function Category({ title, list }: TCategory) {
         setHeightTrack((outerHeight / innerHeight) * heightThumb);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
-    calculateScroller();
-  }, []);
+    if (!list[cursorX + cursorY * 2]) {
+      setCursorX(cursorX - 1);
+    }
+  }, [cursorX, cursorY]);
 
   const translateCursorX = cursorX * (itemWidth + 20) + 10;
   const translateCursorY = Math.min(

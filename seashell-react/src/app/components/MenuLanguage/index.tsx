@@ -39,7 +39,7 @@ function MenuLanguage() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, []);
 
   return (
     <div className="menu-language-wrapper">

@@ -24,7 +24,7 @@ function ButtonBack() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, []);
 
   return (
     <div className="button-back-wrapper">
