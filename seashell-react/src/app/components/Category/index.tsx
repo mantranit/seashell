@@ -44,7 +44,7 @@ function Category({ title, list }: TCategory) {
       });
     } else if (keycode === keyboard.BOTTOM) {
       setCursorY((currenValue) => {
-        return Math.min(currenValue + 1, Math.ceil((list.length - 1) / 2));
+        return Math.min(currenValue + 1, Math.ceil(list.length / 2) - 1);
       });
     } else if (keycode === keyboard.ENTER) {
       const currentItem = list[cursorX + cursorY * 2];
@@ -80,7 +80,7 @@ function Category({ title, list }: TCategory) {
     cursorY * (itemHeight + 20)
   );
   let translateTrackY =
-    (cursorY / Math.ceil((list.length - 1) / 2)) * heightThumb - heightTrack;
+    (cursorY / (Math.ceil(list.length / 2) - 1)) * heightThumb - heightTrack;
   const translatePanelY =
     -((cursorY - 1) * (itemHeight + 20)) +
     (heightThumb - 2 * (itemHeight + 20)) +
