@@ -17,7 +17,7 @@ const menu = [
   },
 ];
 
-function MenuLanguage() {
+function RightBottomButtons() {
   const nagivate = useNavigate();
   const handleKeyDown = (event: any) => {
     let keycode;
@@ -42,8 +42,8 @@ function MenuLanguage() {
   }, []);
 
   return (
-    <div className="menu-language-wrapper">
-      <div className="menu-language">
+    <div className="right-bottom-buttons-wrapper">
+      <div className="right-bottom-buttons">
         {menu.map((item) => {
           return (
             <Link to={item.path} key={item.path}>
@@ -59,4 +59,4 @@ function MenuLanguage() {
   );
 }
 
-export default MenuLanguage;
+export default RightBottomButtons;

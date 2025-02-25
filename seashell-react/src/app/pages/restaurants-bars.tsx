@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ButtonBack from "../components/ButtonBack";
+import LeftBottomButtons from "../components/LeftBottomButtons";
 import Category from "../components/Category";
-import MenuLanguage from "../components/MenuLanguage";
+import RightBottomButtons from "../components/RightBottomButtons";
 
 import imgLounge from "../../assets/categories/bars/lounge.jpg";
 import imgItablian from "../../assets/categories/bars/italian.jpg";
@@ -81,8 +81,8 @@ function RestaurantsBars() {
   return (
     <div className="page restaurants-bars-page">
       <Category title={t("menu.Restaurants & Bars")} list={bars} />
-      <MenuLanguage />
-      <ButtonBack />
+      <RightBottomButtons />
+      <LeftBottomButtons showNavigation={true} />
     </div>
   );
 }

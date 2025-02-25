@@ -1,7 +1,12 @@
-.button-back-wrapper {
+.left-bottom-buttons-wrapper {
   position: absolute;
   left: 28px;
   bottom: 22px;
+  .left-bottom-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   button {
     color: white;
     display: flex;

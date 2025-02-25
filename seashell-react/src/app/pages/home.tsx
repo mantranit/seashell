@@ -1,12 +1,12 @@
 import MenuVertical from "../components/MenuVertical";
-import MenuLanguage from "../components/MenuLanguage";
+import RightBottomButtons from "../components/RightBottomButtons";
 import { VideoBackground } from "../components/VideoBackground";
 
 function Home() {
   return (
     <div className="page home-page">
       <VideoBackground enabledCover={true} />
-      <MenuLanguage />
+      <RightBottomButtons />
       <MenuVertical />
     </div>
   );
