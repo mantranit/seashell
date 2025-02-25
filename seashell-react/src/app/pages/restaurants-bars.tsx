@@ -80,7 +80,7 @@ function RestaurantsBars() {
   ]);
   return (
     <div className="page restaurants-bars-page">
-      <Category title={t("Restaurants & Bars")} list={bars} />
+      <Category title={t("menu.Restaurants & Bars")} list={bars} />
       <MenuLanguage />
       <ButtonBack />
     </div>

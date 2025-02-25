@@ -96,7 +96,7 @@ function MenuVertical() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [currentIndex]);
 
   return (
     <div className="menu-container">

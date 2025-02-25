@@ -12,6 +12,8 @@ const itemWidth = 390;
 const itemHeight = 158;
 const itemInARow = 2;
 const heightThumb = 452;
+const borderCursorWith = 3;
+const gap = 20;
 
 function Category({ title, list }: TCategory) {
   const navigate = useNavigate();
@@ -44,20 +46,27 @@ function Category({ title, list }: TCategory) {
       });
     } else if (keycode === keyboard.BOTTOM) {
       setCursorY((currenValue) => {
-        return Math.min(currenValue + 1, Math.ceil(list.length / 2) - 1);
+        return Math.min(
+          currenValue + 1,
+          Math.ceil(list.length / itemInARow) - 1
+        );
       });
     } else if (keycode === keyboard.ENTER) {
-      const currentItem = list[cursorX + cursorY * 2];
+      const currentItem = list[cursorX + cursorY * itemInARow];
       navigate(currentItem.path);
     }
   };
 
   useEffect(() => {
+    if (!list[cursorX + cursorY * itemInARow]) {
+      setCursorX(cursorX - 1);
+    }
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [cursorX, cursorY]);
 
   // calculateScroller
   useEffect(() => {
@@ -71,23 +80,18 @@ function Category({ title, list }: TCategory) {
     }
   }, []);
 
-  useEffect(() => {
-    if (!list[cursorX + cursorY * 2]) {
-      setCursorX(cursorX - 1);
-    }
-  }, [cursorX, cursorY]);
-
-  const translateCursorX = cursorX * (itemWidth + 20) + 10;
+  const translateCursorX = cursorX * (itemWidth + gap) + gap / 2;
   const translateCursorY = Math.min(
-    heightThumb - itemHeight - 6,
-    cursorY * (itemHeight + 20)
+    heightThumb - itemHeight - borderCursorWith * 2,
+    cursorY * (itemHeight + gap)
   );
   let translateTrackY =
-    (cursorY / (Math.ceil(list.length / 2) - 1)) * heightThumb - heightTrack;
+    (cursorY / (Math.ceil(list.length / itemInARow) - 1)) * heightThumb -
+    heightTrack;
   const translatePanelY =
-    -((cursorY - 1) * (itemHeight + 20)) +
-    (heightThumb - 2 * (itemHeight + 20)) +
-    4;
+    -((cursorY - 1) * (itemHeight + gap)) +
+    (heightThumb - 2 * (itemHeight + gap)) +
+    (borderCursorWith + 1);
 
   return (
     <div className="category-wrapper">
@@ -107,8 +111,8 @@ function Category({ title, list }: TCategory) {
         <div
           className="category-cursor"
           style={{
-            width: itemWidth + 6,
-            height: itemHeight + 6,
+            width: itemWidth + borderCursorWith * 2,
+            height: itemHeight + borderCursorWith * 2,
             transform: `translate(${translateCursorX}px, ${translateCursorY}px)`,
           }}
         />
@@ -116,7 +120,10 @@ function Category({ title, list }: TCategory) {
           className="category-list"
           ref={innerRef}
           style={{
-            transform: `translate(0, ${Math.min(-10, translatePanelY)}px)`,
+            transform: `translate(0, ${Math.min(
+              -(gap / 2),
+              translatePanelY
+            )}px)`,
           }}
         >
           {list.map((item) => {

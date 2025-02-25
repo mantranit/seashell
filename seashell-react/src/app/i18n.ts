@@ -53,7 +53,7 @@ i18n.use(initReactI18next).init({
           Television: "Tivi",
           Connectivity: "Kết nối thiết bị",
           Dining: "Dining",
-          "Restaurants & Bars": "Restaurants & Bars",
+          "Restaurants & Bars": "Nhà hàng & Bar",
           "Spa & Fitness": "Spa & Fitness",
           Shopping: "Shopping",
           "My Orders": "My Orders",
