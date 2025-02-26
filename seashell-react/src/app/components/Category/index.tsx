@@ -1,11 +1,36 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import "./style.scss";
 import { useEffect, useRef, useState } from "react";
 import { keyboard } from "../../keyboard";
+import { t } from "i18next";
+import CategoryItem from "../CategoryItem";
+import SubCategoryItem from "../SubCategoryItem";
+
+export enum ECategoryItemType {
+  category,
+  subcategory,
+}
+export type TCategoryItem = {
+  category?: string[];
+  title: string;
+  subtitle: string;
+  img: string;
+  path: string;
+  type: ECategoryItemType;
+  children?: TCategoryItem[];
+  tags?: string[];
+  price?: number;
+};
 
 type TCategoryProps = {
-  title: string;
-  list: any[];
+  data: {
+    title: string;
+    list: TCategoryItem[];
+    startCursorX: number;
+    startCursorY: number;
+  };
+  goNext: Function;
+  goBack: Function;
 };
 
 const itemWidth = 390;
@@ -15,11 +40,11 @@ const heightThumb = 452;
 const borderCursorWith = 3;
 const gap = 20;
 
-function Category({ title, list }: TCategoryProps) {
-  const navigate = useNavigate();
+function Category({ data, goNext, goBack }: TCategoryProps) {
+  const { title, list, startCursorX, startCursorY } = data;
   const [heightTrack, setHeightTrack] = useState(100);
-  const [cursorX, setCursorX] = useState(0);
-  const [cursorY, setCursorY] = useState(0);
+  const [cursorX, setCursorX] = useState(startCursorX);
+  const [cursorY, setCursorY] = useState(startCursorY);
   const [showThumb, setShowThumb] = useState(false);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -53,7 +78,9 @@ function Category({ title, list }: TCategoryProps) {
       });
     } else if (keycode === keyboard.ENTER) {
       const currentItem = list[cursorX + cursorY * itemInARow];
-      navigate(currentItem.path);
+      goNext({ title: currentItem.title, cursorX, cursorY });
+    } else if (keycode === keyboard.BACK) {
+      goBack();
     }
   };
 
@@ -95,7 +122,7 @@ function Category({ title, list }: TCategoryProps) {
 
   return (
     <div className="category-wrapper">
-      <h2>{title}</h2>
+      <h2>{t(title)}</h2>
       <div className="category-content" ref={outerRef}>
         <div
           className="category-scroller"
@@ -114,6 +141,9 @@ function Category({ title, list }: TCategoryProps) {
             width: itemWidth + borderCursorWith * 2,
             height: itemHeight + borderCursorWith * 2,
             transform: `translate(${translateCursorX}px, ${translateCursorY}px)`,
+            borderRadius: `${
+              list[0].type === ECategoryItemType.category ? 3 : 10
+            }px`,
           }}
         />
         <div
@@ -127,22 +157,23 @@ function Category({ title, list }: TCategoryProps) {
           }}
         >
           {list.map((item) => {
-            return (
-              <div className="category-item" key={item.title}>
-                <Link
-                  to={item.path}
-                  style={{ width: itemWidth, height: itemHeight }}
-                >
-                  <img src={item.img} alt="" />
-                  <div className="brief">
-                    <p className="title">{item.title}</p>
-                    {item.subtitle && (
-                      <p className="subtitle">{item.subtitle}</p>
-                    )}
-                  </div>
-                </Link>
-              </div>
-            );
+            if (item.type === ECategoryItemType.category) {
+              return (
+                <CategoryItem
+                  item={item}
+                  itemWidth={itemWidth}
+                  itemHeight={itemHeight}
+                />
+              );
+            } else {
+              return (
+                <SubCategoryItem
+                  item={item}
+                  itemWidth={itemWidth}
+                  itemHeight={itemHeight}
+                />
+              );
+            }
           })}
         </div>
       </div>

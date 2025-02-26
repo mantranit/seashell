@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
-import Category from "../components/Category";
+import { useState } from "react";
+import Category, {
+  ECategoryItemType,
+  TCategoryItem,
+} from "../components/Category";
 import LeftBottomButtons from "../components/LeftBottomButtons";
 import RightBottomButtons from "../components/RightBottomButtons";
-import { t } from "i18next";
+import { useNavigate } from "react-router";
 
 import imgBreakfasts from "../../assets/categories/dining/breakfasts.jpg";
 import imgBreakfastsOatmeal from "../../assets/categories/dining/oatmeal-breakfast.jpg";
@@ -21,45 +24,51 @@ import imgAlcoholCocktails from "../../assets/categories/dining/alcohol-cocktail
 import imgAlcoholBeer from "../../assets/categories/dining/alcohol-beer.jpg";
 import imgAlcoholWine from "../../assets/categories/dining/alcohol-wine.jpg";
 import imgAlcoholWhiskey from "../../assets/categories/dining/alcohol-whiskey.jpg";
-import SubCategory from "../components/SubCategory";
-import { useLocation } from "react-router";
 
-const data = [
+const responseData: TCategoryItem[] = [
   {
     category: [],
     title: "Breakfasts",
     subtitle: "07:00-11:00",
     img: imgBreakfasts,
     path: "/dining/breakfasts",
-    childrenType: "sub-category",
+    type: ECategoryItemType.category,
     children: [
       {
         title: "Oatmeal Breakfast",
         subtitle: "",
         img: imgBreakfastsOatmeal,
         path: "/dining/breakfasts/oatmeal-breakfast",
-        type: "details",
+        type: ECategoryItemType.subcategory,
+        tags: ["Vegan"],
+        price: 16,
       },
       {
         title: "Pecan Pancakes",
         subtitle: "",
         img: imgBreakfastsPecan,
         path: "/dining/breakfasts/pecan-pancakes",
-        type: "details",
+        type: ECategoryItemType.subcategory,
+        tags: ["Vegan"],
+        price: 8,
       },
       {
         title: "French Toast",
         subtitle: "",
         img: imgBreakfastsFrench,
         path: "/dining/breakfasts/french-toast",
-        type: "details",
+        type: ECategoryItemType.subcategory,
+        tags: ["French Cuisine", "Vegan"],
+        price: 11,
       },
       {
         title: "Biscuits n' Gravy with Bacon",
         subtitle: "",
         img: imgBreakfastsBiscuits,
         path: "/dining/breakfasts/biscuits-with-bacon",
-        type: "details",
+        type: ECategoryItemType.subcategory,
+        tags: ["French Cuisine"],
+        price: 16,
       },
     ],
   },
@@ -69,6 +78,7 @@ const data = [
     subtitle: "07:00-23:00",
     img: imgStarters,
     path: "/dining/starters",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -76,6 +86,7 @@ const data = [
     subtitle: "07:00-23:00",
     img: imgSalads,
     path: "/dining/salads",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -83,6 +94,7 @@ const data = [
     subtitle: "10:00-20:00",
     img: imgSoups,
     path: "/dining/soups",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -90,6 +102,7 @@ const data = [
     subtitle: "10:00-23:00",
     img: imgMains,
     path: "/dining/mains",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -97,6 +110,7 @@ const data = [
     subtitle: "24 hours",
     img: imgDesserts,
     path: "/dining/desserts",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -104,6 +118,7 @@ const data = [
     subtitle: "24 hours",
     img: imgDrinks,
     path: "/dining/drinks",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -111,6 +126,7 @@ const data = [
     subtitle: "24 hours",
     img: imgHotDrinks,
     path: "/dining/hot-drinks",
+    type: ECategoryItemType.category,
   },
   {
     category: [],
@@ -118,68 +134,215 @@ const data = [
     subtitle: "",
     img: imgAlcohol,
     path: "/dining/alcohol",
-    childrenType: "category",
+    type: ECategoryItemType.category,
     children: [
       {
         title: "Cocktails",
         subtitle: "24 hours",
         img: imgAlcoholCocktails,
         path: "/dining/alcohol/cocktails",
-        type: "details",
+        type: ECategoryItemType.category,
+        children: [
+          {
+            title: "Oatmeal Breakfast",
+            subtitle: "",
+            img: imgBreakfastsOatmeal,
+            path: "/dining/alcohol/cocktails/oatmeal-breakfast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Pecan Pancakes",
+            subtitle: "",
+            img: imgBreakfastsPecan,
+            path: "/dining/alcohol/cocktails/pecan-pancakes",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "French Toast",
+            subtitle: "",
+            img: imgBreakfastsFrench,
+            path: "/dining/alcohol/cocktails/french-toast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Biscuits n' Gravy with Bacon",
+            subtitle: "",
+            img: imgBreakfastsBiscuits,
+            path: "/dining/alcohol/cocktails/biscuits-with-bacon",
+            type: ECategoryItemType.subcategory,
+          },
+        ],
       },
       {
         title: "Beer",
         subtitle: "24 hours",
         img: imgAlcoholBeer,
         path: "/dining/alcohol/beer",
-        type: "details",
+        type: ECategoryItemType.category,
+        children: [
+          {
+            title: "Oatmeal Breakfast",
+            subtitle: "",
+            img: imgBreakfastsOatmeal,
+            path: "/dining/alcohol/beer/oatmeal-breakfast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Pecan Pancakes",
+            subtitle: "",
+            img: imgBreakfastsPecan,
+            path: "/dining/alcohol/beer/pecan-pancakes",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "French Toast",
+            subtitle: "",
+            img: imgBreakfastsFrench,
+            path: "/dining/alcohol/beer/french-toast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Biscuits n' Gravy with Bacon",
+            subtitle: "",
+            img: imgBreakfastsBiscuits,
+            path: "/dining/alcohol/beer/biscuits-with-bacon",
+            type: ECategoryItemType.subcategory,
+          },
+        ],
       },
       {
         title: "Wine",
         subtitle: "24 hours",
         img: imgAlcoholWine,
         path: "/dining/alcohol/wine",
-        type: "details",
+        type: ECategoryItemType.category,
+        children: [
+          {
+            title: "Oatmeal Breakfast",
+            subtitle: "",
+            img: imgBreakfastsOatmeal,
+            path: "/dining/alcohol/wine/oatmeal-breakfast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Pecan Pancakes",
+            subtitle: "",
+            img: imgBreakfastsPecan,
+            path: "/dining/alcohol/wine/pecan-pancakes",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "French Toast",
+            subtitle: "",
+            img: imgBreakfastsFrench,
+            path: "/dining/alcohol/wine/french-toast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Biscuits n' Gravy with Bacon",
+            subtitle: "",
+            img: imgBreakfastsBiscuits,
+            path: "/dining/alcohol/wine/biscuits-with-bacon",
+            type: ECategoryItemType.subcategory,
+          },
+        ],
       },
       {
         title: "Whiskey",
         subtitle: "24 hours",
         img: imgAlcoholWhiskey,
         path: "/dining/alcohol/whiskey",
-        type: "details",
+        type: ECategoryItemType.category,
+        children: [
+          {
+            title: "Oatmeal Breakfast",
+            subtitle: "",
+            img: imgBreakfastsOatmeal,
+            path: "/dining/alcohol/whiskey/oatmeal-breakfast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Pecan Pancakes",
+            subtitle: "",
+            img: imgBreakfastsPecan,
+            path: "/dining/alcohol/whiskey/pecan-pancakes",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "French Toast",
+            subtitle: "",
+            img: imgBreakfastsFrench,
+            path: "/dining/alcohol/whiskey/french-toast",
+            type: ECategoryItemType.subcategory,
+          },
+          {
+            title: "Biscuits n' Gravy with Bacon",
+            subtitle: "",
+            img: imgBreakfastsBiscuits,
+            path: "/dining/alcohol/whiskey/biscuits-with-bacon",
+            type: ECategoryItemType.subcategory,
+          },
+        ],
       },
     ],
   },
 ];
 
 function Dining() {
-  const { pathname } = useLocation();
-  const [type, setType] = useState("category");
-  const [title, setTitle] = useState("Dining");
-  const [list, setList] = useState(data);
-  console.log("location", location);
+  const navigate = useNavigate();
+  const [data, setData] = useState([
+    {
+      list: responseData,
+      title: "Dining",
+      startCursorX: 0,
+      startCursorY: 0,
+    },
+  ]);
 
-  useEffect(() => {
-    const flatData = data.flat(Infinity);
-    const currentItem = flatData.find((item) => item.path === pathname);
-    console.log("currentItem", currentItem);
-    if (currentItem) {
-      setTitle(currentItem.title);
-      setList(currentItem.children || data);
-      setType(currentItem?.childrenType || currentItem?.type || "category");
-    }
-  }, [pathname]);
+  const goNext = (nextData: any) => {
+    const { title, cursorX, cursorY } = nextData;
+    setData((currentData) => {
+      currentData[currentData.length - 1].startCursorX = cursorX;
+      currentData[currentData.length - 1].startCursorY = cursorY;
+      const nextList = currentData[currentData.length - 1].list.find(
+        (item) => item.title === title
+      );
+      if (nextList && nextList.children) {
+        return [
+          ...currentData,
+          {
+            list: nextList.children || [],
+            title: nextList.title,
+            startCursorX: 0,
+            startCursorY: 0,
+          },
+        ];
+      }
+      return currentData;
+    });
+  };
+
+  const goBack = () => {
+    setData((currentData) => {
+      if (currentData.length > 1) {
+        currentData.pop();
+      } else {
+        navigate(-1);
+      }
+      return [...currentData];
+    });
+  };
 
   return (
     <div className="page restaurants-bars-page">
-      {type === "category" && (
-        <Category key={title} title={t(`${title}`)} list={list} />
-      )}
-      {type === "sub-category" && (
-        <SubCategory key={title} title={t(`${title}`)} list={list} />
-      )}
-      <RightBottomButtons />
+      <Category
+        key={data[data.length - 1].title}
+        data={data[data.length - 1]}
+        goNext={goNext}
+        goBack={goBack}
+      />
       <LeftBottomButtons showNavigation={true} />
+      <RightBottomButtons />
     </div>
   );
 }

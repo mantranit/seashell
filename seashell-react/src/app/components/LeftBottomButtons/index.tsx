@@ -5,10 +5,14 @@ import { useEffect } from "react";
 import { keyboard } from "../../keyboard";
 
 type TLeftBottomButtonsProps = {
+  enabledBack?: boolean;
   showNavigation?: boolean;
 };
 
-function LeftBottomButtons({ showNavigation }: TLeftBottomButtonsProps) {
+function LeftBottomButtons({
+  enabledBack = false,
+  showNavigation,
+}: TLeftBottomButtonsProps) {
   const navigate = useNavigate();
   const handleKeyDown = (event: any) => {
     let keycode;
@@ -18,7 +22,7 @@ function LeftBottomButtons({ showNavigation }: TLeftBottomButtonsProps) {
       keycode = event.which;
     }
 
-    if (keycode === keyboard.BACK) {
+    if (keycode === keyboard.BACK && enabledBack) {
       navigate(-1);
     }
   };
@@ -33,7 +37,7 @@ function LeftBottomButtons({ showNavigation }: TLeftBottomButtonsProps) {
   return (
     <div className="left-bottom-buttons-wrapper">
       <div className="left-bottom-buttons">
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => enabledBack && navigate(-1)}>
           <span className="icon">
             <svg
               id="btn_back"

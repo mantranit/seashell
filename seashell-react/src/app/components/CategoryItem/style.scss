@@ -1,0 +1,35 @@
+.category-item {
+  width: 50%;
+  float: left;
+  padding: 10px;
+  a {
+    display: block;
+    width: 390px;
+    height: 158px;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    line-height: 1;
+    &:hover {
+      color: white;
+    }
+  }
+  .brief {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 18px 20px;
+    background: url(../../../assets//icons/pagelist_bg_v3.png) repeat-x;
+    .title {
+      margin: 0;
+      font-size: 24px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .subtitle {
+      margin: 6px 0 0;
+      font-size: 16px;
+    }
+  }
+}
