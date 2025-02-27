@@ -31,7 +31,7 @@ type TCategoryListProps = {
     startCursorX: number;
     startCursorY: number;
   };
-  setCursorXY: Function;
+  cursorXYChanged: Function;
   goNext: Function;
   goBack: Function;
 };
@@ -45,7 +45,7 @@ const gap = 20;
 
 function CategoryList({
   data,
-  setCursorXY,
+  cursorXYChanged,
   goNext,
   goBack,
 }: TCategoryListProps) {
@@ -93,8 +93,8 @@ function CategoryList({
   };
 
   useEffect(() => {
-    setCursorXY({ cursorX, cursorY });
-    if (!list[cursorX + cursorY * itemInARow]) {
+    cursorXYChanged({ cursorX, cursorY });
+    if (!list[cursorX + cursorY * itemInARow] && cursorX > 0) {
       setCursorX(cursorX - 1);
     }
 

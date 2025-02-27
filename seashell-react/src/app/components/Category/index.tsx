@@ -20,7 +20,7 @@ function Category({ responseData, initView }: TCategoryProps) {
   const [viewed, setViewed] = useState([initView]);
   const [trackingViewed, setTrackingViewed] = useState([initView]);
 
-  const setCursorXY = ({ cursorX, cursorY }: any) => {
+  const cursorXYChanged = ({ cursorX, cursorY }: any) => {
     setViewed((currentViewed) => {
       currentViewed[currentViewed.length - 1].startCursorX = cursorX;
       currentViewed[currentViewed.length - 1].startCursorY = cursorY;
@@ -88,7 +88,7 @@ function Category({ responseData, initView }: TCategoryProps) {
     <CategoryList
       key={data.title}
       data={data}
-      setCursorXY={setCursorXY}
+      cursorXYChanged={cursorXYChanged}
       goNext={goNext}
       goBack={goBack}
     />
