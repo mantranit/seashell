@@ -113,7 +113,7 @@ function Category({ responseData, initView }: TCategoryProps) {
     );
   }
 
-  return <ProductDetails key={JSON.stringify(currentViewed)} />;
+  return <ProductDetails key={JSON.stringify(currentViewed)} goBack={goBack} />;
 }
 
 export default Category;
