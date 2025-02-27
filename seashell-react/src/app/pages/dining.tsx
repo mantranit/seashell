@@ -1,11 +1,7 @@
-import { useState } from "react";
-import Category, {
-  ECategoryItemType,
-  TCategoryItem,
-} from "../components/Category";
+import { ECategoryItemType, TCategoryItem } from "../components/CategoryList";
+import Category from "../components/Category";
 import LeftBottomButtons from "../components/LeftBottomButtons";
 import RightBottomButtons from "../components/RightBottomButtons";
-import { useNavigate } from "react-router";
 
 import imgBreakfasts from "../../assets/categories/dining/breakfasts.jpg";
 import imgBreakfastsOatmeal from "../../assets/categories/dining/oatmeal-breakfast.jpg";
@@ -27,319 +23,644 @@ import imgAlcoholWhiskey from "../../assets/categories/dining/alcohol-whiskey.jp
 
 const responseData: TCategoryItem[] = [
   {
+    id: "dining001",
     category: [],
     title: "Breakfasts",
-    subtitle: "07:00-11:00",
+    time: "07:00-11:00",
     img: imgBreakfasts,
-    path: "/dining/breakfasts",
     type: ECategoryItemType.category,
-    children: [
-      {
-        title: "Oatmeal Breakfast",
-        subtitle: "",
-        img: imgBreakfastsOatmeal,
-        path: "/dining/breakfasts/oatmeal-breakfast",
-        type: ECategoryItemType.subcategory,
-        tags: ["Vegan"],
-        price: 16,
-      },
-      {
-        title: "Pecan Pancakes",
-        subtitle: "",
-        img: imgBreakfastsPecan,
-        path: "/dining/breakfasts/pecan-pancakes",
-        type: ECategoryItemType.subcategory,
-        tags: ["Vegan"],
-        price: 8,
-      },
-      {
-        title: "French Toast",
-        subtitle: "",
-        img: imgBreakfastsFrench,
-        path: "/dining/breakfasts/french-toast",
-        type: ECategoryItemType.subcategory,
-        tags: ["French Cuisine", "Vegan"],
-        price: 11,
-      },
-      {
-        title: "Biscuits n' Gravy with Bacon",
-        subtitle: "",
-        img: imgBreakfastsBiscuits,
-        path: "/dining/breakfasts/biscuits-with-bacon",
-        type: ECategoryItemType.subcategory,
-        tags: ["French Cuisine"],
-        price: 16,
-      },
-    ],
+    parentId: null,
   },
   {
+    id: "dining00101",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining001",
+  },
+  {
+    id: "dining00102",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining001",
+  },
+  {
+    id: "dining00103",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining001",
+  },
+  {
+    id: "dining00104",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining001",
+  },
+  {
+    id: "dining002",
     category: [],
     title: "Starters",
-    subtitle: "07:00-23:00",
+    time: "07:00-23:00",
     img: imgStarters,
-    path: "/dining/starters",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00201",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining002",
+  },
+  {
+    id: "dining00202",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining002",
+  },
+  {
+    id: "dining00203",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining002",
+  },
+  {
+    id: "dining00204",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining002",
+  },
+  {
+    id: "dining003",
     category: [],
     title: "Salads",
-    subtitle: "07:00-23:00",
+    time: "07:00-23:00",
     img: imgSalads,
-    path: "/dining/salads",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00301",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining003",
+  },
+  {
+    id: "dining00302",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining003",
+  },
+  {
+    id: "dining00303",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining003",
+  },
+  {
+    id: "dining00304",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining003",
+  },
+  {
+    id: "dining004",
     category: [],
     title: "Soups",
-    subtitle: "10:00-20:00",
+    time: "10:00-20:00",
     img: imgSoups,
-    path: "/dining/soups",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00401",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining004",
+  },
+  {
+    id: "dining00402",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining004",
+  },
+  {
+    id: "dining00403",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining004",
+  },
+  {
+    id: "dining00404",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining004",
+  },
+  {
+    id: "dining005",
     category: [],
     title: "Mains",
-    subtitle: "10:00-23:00",
+    time: "10:00-23:00",
     img: imgMains,
-    path: "/dining/mains",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00501",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining005",
+  },
+  {
+    id: "dining00502",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining005",
+  },
+  {
+    id: "dining00503",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining005",
+  },
+  {
+    id: "dining00504",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining005",
+  },
+  {
+    id: "dining006",
     category: [],
     title: "Desserts",
-    subtitle: "24 hours",
+    time: "24 hours",
     img: imgDesserts,
-    path: "/dining/desserts",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00601",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining006",
+  },
+  {
+    id: "dining00602",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining006",
+  },
+  {
+    id: "dining00603",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining006",
+  },
+  {
+    id: "dining00604",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining006",
+  },
+  {
+    id: "dining009",
     category: [],
     title: "Drinks",
-    subtitle: "24 hours",
+    time: "24 hours",
     img: imgDrinks,
-    path: "/dining/drinks",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00901",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining009",
+  },
+  {
+    id: "dining00902",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining009",
+  },
+  {
+    id: "dining00903",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining009",
+  },
+  {
+    id: "dining00904",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining009",
+  },
+  {
+    id: "dining007",
     category: [],
     title: "Hot Drinks",
-    subtitle: "24 hours",
+    time: "24 hours",
     img: imgHotDrinks,
-    path: "/dining/hot-drinks",
     type: ECategoryItemType.category,
+    parentId: null,
   },
   {
+    id: "dining00701",
+    title: "Oatmeal Breakfast",
+    time: "07:00-11:00",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 16,
+    parentId: "dining007",
+  },
+  {
+    id: "dining00702",
+    title: "Pecan Pancakes",
+    time: "07:00-11:00",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
+    tags: ["Vegan"],
+    price: 8,
+    parentId: "dining007",
+  },
+  {
+    id: "dining00703",
+    title: "French Toast",
+    time: "07:00-11:00",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
+    tags: ["French Cuisine", "Vegan"],
+    price: 11,
+    parentId: "dining007",
+  },
+  {
+    id: "dining00704",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "07:00-11:00",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    description:
+      "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
+    tags: ["French Cuisine"],
+    price: 16,
+    parentId: "dining007",
+  },
+  {
+    id: "dining008",
     category: [],
     title: "Alcohol",
-    subtitle: "",
+    time: "",
     img: imgAlcohol,
-    path: "/dining/alcohol",
     type: ECategoryItemType.category,
-    children: [
-      {
-        title: "Cocktails",
-        subtitle: "24 hours",
-        img: imgAlcoholCocktails,
-        path: "/dining/alcohol/cocktails",
-        type: ECategoryItemType.category,
-        children: [
-          {
-            title: "Oatmeal Breakfast",
-            subtitle: "",
-            img: imgBreakfastsOatmeal,
-            path: "/dining/alcohol/cocktails/oatmeal-breakfast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Pecan Pancakes",
-            subtitle: "",
-            img: imgBreakfastsPecan,
-            path: "/dining/alcohol/cocktails/pecan-pancakes",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "French Toast",
-            subtitle: "",
-            img: imgBreakfastsFrench,
-            path: "/dining/alcohol/cocktails/french-toast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Biscuits n' Gravy with Bacon",
-            subtitle: "",
-            img: imgBreakfastsBiscuits,
-            path: "/dining/alcohol/cocktails/biscuits-with-bacon",
-            type: ECategoryItemType.subcategory,
-          },
-        ],
-      },
-      {
-        title: "Beer",
-        subtitle: "24 hours",
-        img: imgAlcoholBeer,
-        path: "/dining/alcohol/beer",
-        type: ECategoryItemType.category,
-        children: [
-          {
-            title: "Oatmeal Breakfast",
-            subtitle: "",
-            img: imgBreakfastsOatmeal,
-            path: "/dining/alcohol/beer/oatmeal-breakfast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Pecan Pancakes",
-            subtitle: "",
-            img: imgBreakfastsPecan,
-            path: "/dining/alcohol/beer/pecan-pancakes",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "French Toast",
-            subtitle: "",
-            img: imgBreakfastsFrench,
-            path: "/dining/alcohol/beer/french-toast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Biscuits n' Gravy with Bacon",
-            subtitle: "",
-            img: imgBreakfastsBiscuits,
-            path: "/dining/alcohol/beer/biscuits-with-bacon",
-            type: ECategoryItemType.subcategory,
-          },
-        ],
-      },
-      {
-        title: "Wine",
-        subtitle: "24 hours",
-        img: imgAlcoholWine,
-        path: "/dining/alcohol/wine",
-        type: ECategoryItemType.category,
-        children: [
-          {
-            title: "Oatmeal Breakfast",
-            subtitle: "",
-            img: imgBreakfastsOatmeal,
-            path: "/dining/alcohol/wine/oatmeal-breakfast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Pecan Pancakes",
-            subtitle: "",
-            img: imgBreakfastsPecan,
-            path: "/dining/alcohol/wine/pecan-pancakes",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "French Toast",
-            subtitle: "",
-            img: imgBreakfastsFrench,
-            path: "/dining/alcohol/wine/french-toast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Biscuits n' Gravy with Bacon",
-            subtitle: "",
-            img: imgBreakfastsBiscuits,
-            path: "/dining/alcohol/wine/biscuits-with-bacon",
-            type: ECategoryItemType.subcategory,
-          },
-        ],
-      },
-      {
-        title: "Whiskey",
-        subtitle: "24 hours",
-        img: imgAlcoholWhiskey,
-        path: "/dining/alcohol/whiskey",
-        type: ECategoryItemType.category,
-        children: [
-          {
-            title: "Oatmeal Breakfast",
-            subtitle: "",
-            img: imgBreakfastsOatmeal,
-            path: "/dining/alcohol/whiskey/oatmeal-breakfast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Pecan Pancakes",
-            subtitle: "",
-            img: imgBreakfastsPecan,
-            path: "/dining/alcohol/whiskey/pecan-pancakes",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "French Toast",
-            subtitle: "",
-            img: imgBreakfastsFrench,
-            path: "/dining/alcohol/whiskey/french-toast",
-            type: ECategoryItemType.subcategory,
-          },
-          {
-            title: "Biscuits n' Gravy with Bacon",
-            subtitle: "",
-            img: imgBreakfastsBiscuits,
-            path: "/dining/alcohol/whiskey/biscuits-with-bacon",
-            type: ECategoryItemType.subcategory,
-          },
-        ],
-      },
-    ],
+    parentId: null,
+  },
+  {
+    id: "dining00801",
+    title: "Cocktails",
+    time: "24 hours",
+    img: imgAlcoholCocktails,
+    type: ECategoryItemType.category,
+    parentId: "dining008",
+  },
+  {
+    id: "dining0080101",
+    title: "Oatmeal Breakfast",
+    time: "24 hours",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00801",
+  },
+  {
+    id: "dining0080102",
+    title: "Pecan Pancakes",
+    time: "24 hours",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00801",
+  },
+  {
+    id: "dining0080103",
+    title: "French Toast",
+    time: "24 hours",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00801",
+  },
+  {
+    id: "dining0080104",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "24 hours",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00801",
+  },
+  {
+    id: "dining00802",
+    title: "Beer",
+    time: "24 hours",
+    img: imgAlcoholBeer,
+    type: ECategoryItemType.category,
+    parentId: "dining008",
+  },
+  {
+    id: "dining0080201",
+    title: "Oatmeal Breakfast",
+    time: "24 hours",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00802",
+  },
+  {
+    id: "dining0080202",
+    title: "Pecan Pancakes",
+    time: "24 hours",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00802",
+  },
+  {
+    id: "dining0080203",
+    title: "French Toast",
+    time: "24 hours",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00802",
+  },
+  {
+    id: "dining0080204",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "24 hours",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00802",
+  },
+  {
+    id: "dining00803",
+    title: "Wine",
+    time: "24 hours",
+    img: imgAlcoholWine,
+    type: ECategoryItemType.category,
+    parentId: "dining008",
+  },
+  {
+    id: "dining0080301",
+    title: "Oatmeal Breakfast",
+    time: "24 hours",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00803",
+  },
+  {
+    id: "dining0080302",
+    title: "Pecan Pancakes",
+    time: "24 hours",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00803",
+  },
+  {
+    id: "dining0080303",
+    title: "French Toast",
+    time: "24 hours",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00803",
+  },
+  {
+    id: "dining0080304",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "24 hours",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00803",
+  },
+  {
+    id: "dining00804",
+    title: "Whiskey",
+    time: "24 hours",
+    img: imgAlcoholWhiskey,
+    type: ECategoryItemType.category,
+    parentId: "dining008",
+  },
+  {
+    id: "dining0080401",
+    title: "Oatmeal Breakfast",
+    time: "24 hours",
+    img: imgBreakfastsOatmeal,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00804",
+  },
+  {
+    id: "dining0080402",
+    title: "Pecan Pancakes",
+    time: "24 hours",
+    img: imgBreakfastsPecan,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00804",
+  },
+  {
+    id: "dining0080403",
+    title: "French Toast",
+    time: "24 hours",
+    img: imgBreakfastsFrench,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00804",
+  },
+  {
+    id: "dining0080404",
+    title: "Biscuits n' Gravy with Bacon",
+    time: "24 hours",
+    img: imgBreakfastsBiscuits,
+    type: ECategoryItemType.subcategory,
+    parentId: "dining00804",
   },
 ];
 
 function Dining() {
-  const navigate = useNavigate();
-  const [data, setData] = useState([
-    {
-      list: responseData,
-      title: "Dining",
-      startCursorX: 0,
-      startCursorY: 0,
-    },
-  ]);
-
-  const goNext = (nextData: any) => {
-    const { title, cursorX, cursorY } = nextData;
-    setData((currentData) => {
-      currentData[currentData.length - 1].startCursorX = cursorX;
-      currentData[currentData.length - 1].startCursorY = cursorY;
-      const nextList = currentData[currentData.length - 1].list.find(
-        (item) => item.title === title
-      );
-      if (nextList && nextList.children) {
-        return [
-          ...currentData,
-          {
-            list: nextList.children || [],
-            title: nextList.title,
-            startCursorX: 0,
-            startCursorY: 0,
-          },
-        ];
-      }
-      return currentData;
-    });
-  };
-
-  const goBack = () => {
-    setData((currentData) => {
-      if (currentData.length > 1) {
-        currentData.pop();
-      } else {
-        navigate(-1);
-      }
-      return [...currentData];
-    });
-  };
-
   return (
     <div className="page restaurants-bars-page">
       <Category
-        key={data[data.length - 1].title}
-        data={data[data.length - 1]}
-        goNext={goNext}
-        goBack={goBack}
+        responseData={responseData}
+        initView={{
+          id: "dining",
+          title: "Dining",
+          parentId: null,
+          startCursorX: 0,
+          startCursorY: 0,
+        }}
       />
       <LeftBottomButtons showNavigation={true} />
       <RightBottomButtons />

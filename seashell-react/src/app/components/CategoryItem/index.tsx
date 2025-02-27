@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { TCategoryItem } from "../Category";
+import { TCategoryItem } from "../CategoryList";
 import "./style.scss";
 
 type TCategoryItemProps = {
@@ -15,7 +15,7 @@ function CategoryItem({ item, itemWidth, itemHeight }: TCategoryItemProps) {
         <img src={item.img} alt="" width={itemWidth} height={itemHeight} />
         <div className="brief">
           <p className="title">{item.title}</p>
-          {item.subtitle && <p className="subtitle">{item.subtitle}</p>}
+          {item.time && <p className="time">{item.time}</p>}
         </div>
       </Link>
     </div>

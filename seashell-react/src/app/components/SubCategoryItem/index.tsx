@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { TCategoryItem } from "../Category";
+import { TCategoryItem } from "../CategoryList";
 import "./style.scss";
 
 type TSubCategoryItemProps = {
@@ -15,7 +15,10 @@ function SubCategoryItem({
 }: TSubCategoryItemProps) {
   return (
     <div className="sub-category-item">
-      <Link to={item.path} style={{ width: itemWidth, height: itemHeight }}>
+      <div
+        className="item-content"
+        style={{ width: itemWidth, height: itemHeight }}
+      >
         <div className="img" style={{ width: 128, height: 128 }}>
           <img src={item.img} alt="" width={128} height={128} />
         </div>
@@ -24,13 +27,18 @@ function SubCategoryItem({
           <div className="subtitle">
             <p className="tags">
               {item.tags?.map((tag) => (
-                <span>{tag}</span>
+                <span key={tag}>{tag}</span>
               ))}
             </p>
-            <p className="price">{item.price}</p>
+            <p className="price">
+              {(item.price ?? 0).toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </p>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
