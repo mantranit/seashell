@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CategoryList, { TCategoryItem } from "../CategoryList";
 
@@ -22,30 +22,31 @@ function Category({ responseData, initView }: TCategoryProps) {
 
   const cursorXYChanged = ({ cursorX, cursorY }: any) => {
     setViewed((currentViewed) => {
-      currentViewed[currentViewed.length - 1].startCursorX = cursorX;
-      currentViewed[currentViewed.length - 1].startCursorY = cursorY;
+      const currentItem = currentViewed[currentViewed.length - 1];
+      currentItem.startCursorX = cursorX;
+      currentItem.startCursorY = cursorY;
       const exist = trackingViewed.find(
-        (tracking) =>
-          tracking.parentId === currentViewed[currentViewed.length - 1].parentId
+        (tracking) => tracking.id === currentItem.id
       );
       if (exist) {
         exist.startCursorX = cursorX;
         exist.startCursorY = cursorY;
       }
+      setTrackingViewed([...trackingViewed]);
       return [...currentViewed];
     });
   };
 
   const goNext = (nextItem: TCategoryItem) => {
-    const { id, title } = nextItem;
+    const { id, title, parentId } = nextItem;
     setViewed((currentViewed: any) => {
       let nextViewItem;
-      const exist = trackingViewed.find((tracking) => tracking.parentId === id);
+      const exist = trackingViewed.find((tracking) => tracking.id === id);
       if (exist) {
         nextViewItem = {
           id,
           title,
-          parentId: id,
+          parentId,
           startCursorX: exist.startCursorX,
           startCursorY: exist.startCursorY,
         };
@@ -53,7 +54,7 @@ function Category({ responseData, initView }: TCategoryProps) {
         nextViewItem = {
           id,
           title,
-          parentId: id,
+          parentId,
           startCursorX: 0,
           startCursorY: 0,
         };
@@ -74,19 +75,34 @@ function Category({ responseData, initView }: TCategoryProps) {
     });
   };
 
+  useEffect(() => {
+    const key = initView.id.toString();
+    const jsonString = localStorage.getItem(key) || "{}";
+    const jsonData = JSON.parse(jsonString);
+    if (jsonData.trackingViewed) {
+      setTrackingViewed([...jsonData.trackingViewed]);
+      setViewed(() => [{ ...jsonData.trackingViewed[0] }]);
+    }
+  }, []);
+
+  useEffect(() => {
+    const key = initView.id.toString();
+    localStorage.setItem(key, JSON.stringify({ trackingViewed }));
+  }, [trackingViewed]);
+
   const currentViewed = viewed[viewed.length - 1];
   const data = {
     list: responseData.filter((item: TCategoryItem) => {
-      return item.parentId === currentViewed.parentId;
+      return item.parentId === currentViewed.id;
     }),
     title: currentViewed.title,
     startCursorX: currentViewed.startCursorX,
     startCursorY: currentViewed.startCursorY,
   };
-  console.log(viewed, trackingViewed);
+
   return (
     <CategoryList
-      key={data.title}
+      key={JSON.stringify(currentViewed)}
       data={data}
       cursorXYChanged={cursorXYChanged}
       goNext={goNext}

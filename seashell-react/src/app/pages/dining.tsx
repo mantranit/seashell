@@ -29,7 +29,7 @@ const responseData: TCategoryItem[] = [
     time: "07:00-11:00",
     img: imgBreakfasts,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00101",
@@ -86,7 +86,7 @@ const responseData: TCategoryItem[] = [
     time: "07:00-23:00",
     img: imgStarters,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00201",
@@ -143,7 +143,7 @@ const responseData: TCategoryItem[] = [
     time: "07:00-23:00",
     img: imgSalads,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00301",
@@ -200,7 +200,7 @@ const responseData: TCategoryItem[] = [
     time: "10:00-20:00",
     img: imgSoups,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00401",
@@ -257,7 +257,7 @@ const responseData: TCategoryItem[] = [
     time: "10:00-23:00",
     img: imgMains,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00501",
@@ -314,7 +314,7 @@ const responseData: TCategoryItem[] = [
     time: "24 hours",
     img: imgDesserts,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00601",
@@ -371,7 +371,7 @@ const responseData: TCategoryItem[] = [
     time: "24 hours",
     img: imgDrinks,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00901",
@@ -428,7 +428,7 @@ const responseData: TCategoryItem[] = [
     time: "24 hours",
     img: imgHotDrinks,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00701",
@@ -485,7 +485,7 @@ const responseData: TCategoryItem[] = [
     time: "",
     img: imgAlcohol,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "dining",
   },
   {
     id: "dining00801",
