@@ -113,7 +113,16 @@ function Category({ responseData, initView }: TCategoryProps) {
     );
   }
 
-  return <ProductDetails key={JSON.stringify(currentViewed)} goBack={goBack} />;
+  const product = responseData.find((item) => item.id === currentViewed.id);
+  if (product) {
+    return (
+      <ProductDetails
+        key={JSON.stringify(currentViewed)}
+        goBack={goBack}
+        product={product}
+      />
+    );
+  }
 }
 
 export default Category;

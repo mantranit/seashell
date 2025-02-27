@@ -121,7 +121,7 @@ function CategoryList({
     heightThumb - itemHeight - borderCursorWith * 2,
     cursorY * (itemHeight + gap)
   );
-  let translateTrackY =
+  const translateTrackY =
     (cursorY / (Math.ceil(list.length / itemInARow) - 1)) * heightThumb -
     heightTrack;
   const translatePanelY =
