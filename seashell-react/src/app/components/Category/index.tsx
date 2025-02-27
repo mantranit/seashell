@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CategoryList, { TCategoryItem } from "../CategoryList";
+import ProductDetails from "../ProductDetails";
 
 type TView = {
   id: number | string;
@@ -81,13 +82,13 @@ function Category({ responseData, initView }: TCategoryProps) {
     const jsonData = JSON.parse(jsonString);
     if (jsonData.trackingViewed) {
       setTrackingViewed([...jsonData.trackingViewed]);
-      setViewed(() => [{ ...jsonData.trackingViewed[0] }]);
+      setViewed([...jsonData.viewed]);
     }
   }, []);
 
   useEffect(() => {
     const key = initView.id.toString();
-    localStorage.setItem(key, JSON.stringify({ trackingViewed }));
+    localStorage.setItem(key, JSON.stringify({ viewed, trackingViewed }));
   }, [trackingViewed]);
 
   const currentViewed = viewed[viewed.length - 1];
@@ -100,15 +101,19 @@ function Category({ responseData, initView }: TCategoryProps) {
     startCursorY: currentViewed.startCursorY,
   };
 
-  return (
-    <CategoryList
-      key={JSON.stringify(currentViewed)}
-      data={data}
-      cursorXYChanged={cursorXYChanged}
-      goNext={goNext}
-      goBack={goBack}
-    />
-  );
+  if (data.list.length > 0) {
+    return (
+      <CategoryList
+        key={JSON.stringify(currentViewed)}
+        data={data}
+        cursorXYChanged={cursorXYChanged}
+        goNext={goNext}
+        goBack={goBack}
+      />
+    );
+  }
+
+  return <ProductDetails key={JSON.stringify(currentViewed)} />;
 }
 
 export default Category;

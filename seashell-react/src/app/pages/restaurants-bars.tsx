@@ -20,7 +20,7 @@ const responseData: TCategoryItem[] = [
     img: imgLounge,
     imgDetails: imgLoungeDetails,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "bars",
   },
   {
     id: "bars002",
@@ -29,7 +29,7 @@ const responseData: TCategoryItem[] = [
     img: imgItablian,
     imgDetails: imgItablianDetails,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "bars",
   },
   {
     id: "bars003",
@@ -38,7 +38,7 @@ const responseData: TCategoryItem[] = [
     img: imgLobby,
     imgDetails: imgLobbyDetails,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "bars",
   },
   {
     id: "bars004",
@@ -47,7 +47,7 @@ const responseData: TCategoryItem[] = [
     img: imgAsia,
     imgDetails: imgAsiaDetails,
     type: ECategoryItemType.category,
-    parentId: null,
+    parentId: "bars",
   },
 ];
 

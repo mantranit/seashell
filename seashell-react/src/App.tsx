@@ -34,7 +34,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="television" element={<Television />} />
           <Route path="connectivity" element={<Connectivity />} />
-          <Route path="dining/*" element={<Dining />} />
+          <Route path="dining" element={<Dining />} />
           <Route path="restaurants-bars" element={<RestaurantsBars />} />
           <Route path="spa-fitness" element={<SpaFitness />} />
           <Route path="shopping" element={<Shopping />} />
