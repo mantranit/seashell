@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { TCategoryItem } from "../CategoryList";
 import "./style.scss";
 
