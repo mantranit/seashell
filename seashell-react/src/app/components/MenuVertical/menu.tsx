@@ -1,5 +1,6 @@
 export const menu = [
   {
+    id: "tv",
     icon: (
       <svg
         id="icon-tv"
@@ -17,6 +18,7 @@ export const menu = [
     path: "/television",
   },
   {
+    id: "connectivity",
     icon: (
       <svg
         id="icon-connectivity"
@@ -34,6 +36,7 @@ export const menu = [
     path: "/connectivity",
   },
   {
+    id: "dining",
     icon: (
       <svg
         id="icon-dining"
@@ -52,6 +55,7 @@ export const menu = [
     path: "/dining",
   },
   {
+    id: "bars",
     icon: (
       <svg
         id="icon-bar"
@@ -69,6 +73,7 @@ export const menu = [
     path: "/restaurants-bars",
   },
   {
+    id: "spa",
     icon: (
       <svg
         id="icon-towel"
@@ -86,6 +91,7 @@ export const menu = [
     path: "/spa-fitness",
   },
   {
+    id: "shopping",
     icon: (
       <svg
         id="icon-shopping-bag"
@@ -103,6 +109,7 @@ export const menu = [
     path: "/shopping",
   },
   {
+    id: "my-orders",
     icon: (
       <svg
         id="icon-shopping-cart-loaded"
@@ -120,6 +127,7 @@ export const menu = [
     path: "/my-orders",
   },
   {
+    id: "movies",
     icon: (
       <svg
         id="icon-movies"
@@ -137,6 +145,7 @@ export const menu = [
     path: "/movies",
   },
   {
+    id: "radio",
     icon: (
       <svg
         id="icon-radio"
@@ -154,6 +163,7 @@ export const menu = [
     path: "/radio",
   },
   {
+    id: "information",
     icon: (
       <svg
         id="icon-info"
@@ -171,6 +181,7 @@ export const menu = [
     path: "/hotel-information",
   },
   {
+    id: "services",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +199,7 @@ export const menu = [
     path: "/room-service",
   },
   {
+    id: "wake-up-call",
     icon: (
       <svg
         id="icon-alarm-clock"
@@ -205,6 +217,7 @@ export const menu = [
     path: "/wake-up-call",
   },
   {
+    id: "messages",
     icon: (
       <svg
         id="icon-messages"
@@ -222,6 +235,7 @@ export const menu = [
     path: "/messages",
   },
   {
+    id: "feedback",
     icon: (
       <svg
         id="icon-survey"
@@ -239,6 +253,7 @@ export const menu = [
     path: "/feedback",
   },
   {
+    id: "check-bill",
     icon: (
       <svg
         id="icon-viewbill"
@@ -256,6 +271,7 @@ export const menu = [
     path: "/check-bill",
   },
   {
+    id: "flight",
     icon: (
       <svg
         id="icon-flights"
@@ -273,6 +289,7 @@ export const menu = [
     path: "/flight-info",
   },
   {
+    id: "settings",
     icon: (
       <svg
         id="icon-settings"
