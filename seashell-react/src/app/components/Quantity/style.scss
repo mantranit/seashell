@@ -1,0 +1,41 @@
+.quantity {
+  display: flex;
+  width: 395px;
+  height: 55px;
+  border: 1px solid white;
+  margin: 2px;
+  font-size: 24px;
+  line-height: 50px;
+  border-radius: 5px;
+  padding: 0;
+  background: none;
+  color: white;
+  text-align: center;
+  &.quantity--active {
+    margin: 0;
+    border: 3px solid #2459ab;
+    animation: tv_cur_live 2s ease-in-out infinite alternate;
+    border-radius: 10px;
+  }
+  .count {
+    flex-grow: 1;
+  }
+  button {
+    padding: 3px 0 0;
+    margin: 0;
+    background: none;
+    border: none;
+    width: 55px;
+    &.plus {
+      border-left: 1px solid white;
+    }
+    &.minus {
+      border-right: 1px solid white;
+    }
+    svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+  }
+}

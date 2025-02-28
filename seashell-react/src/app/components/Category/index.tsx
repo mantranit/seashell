@@ -111,17 +111,17 @@ function Category({ responseData, initView }: TCategoryProps) {
         goBack={goBack}
       />
     );
-  }
-
-  const product = responseData.find((item) => item.id === currentViewed.id);
-  if (product) {
-    return (
-      <ProductDetails
-        key={JSON.stringify(currentViewed)}
-        goBack={goBack}
-        product={product}
-      />
-    );
+  } else {
+    const product = responseData.find((item) => item.id === currentViewed.id);
+    if (product) {
+      return (
+        <ProductDetails
+          key={JSON.stringify(currentViewed)}
+          goBack={goBack}
+          product={product}
+        />
+      );
+    }
   }
 }
 

@@ -17,7 +17,9 @@
     url(./assets/fonts/SVN-Gotham-Regular.woff2) format("woff2");
 }
 
-:root {
+:root,
+button,
+input {
   font-family: "Gotham Book", Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-weight: 400;

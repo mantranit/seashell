@@ -1,10 +1,15 @@
-import { Link } from "react-router";
 import "./style.scss";
 import { useEffect, useRef, useState } from "react";
 import { keyboard } from "../../keyboard";
 import { t } from "i18next";
 import CategoryItem from "../CategoryItem";
 import SubCategoryItem from "../SubCategoryItem";
+
+export enum EOrderType {
+  selectTime = "Select time",
+  continue = "Continue",
+  addToCart = "Add to cart",
+}
 
 export enum ECategoryItemType {
   category,
@@ -22,6 +27,9 @@ export type TCategoryItem = {
   tags?: string[];
   price?: number;
   parentId: null | number | string;
+  orderCount?: boolean;
+  orderUnit?: string;
+  orderType?: EOrderType;
 };
 
 type TCategoryListProps = {

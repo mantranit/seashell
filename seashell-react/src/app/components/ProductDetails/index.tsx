@@ -3,6 +3,8 @@ import { keyboard } from "../../keyboard";
 import "./style.scss";
 import { t } from "i18next";
 import { TCategoryItem } from "../CategoryList";
+import Button from "../Button";
+import Quantity from "../Quantity";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
@@ -25,8 +27,12 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
       keycode = event.which;
     }
 
-    if (keycode === keyboard.TOP) {
+    if (keycode === keyboard.RIGHT) {
+    } else if (keycode === keyboard.LEFT) {
+    } else if (keycode === keyboard.TOP) {
     } else if (keycode === keyboard.BOTTOM) {
+    } else if (keycode === keyboard.ENTER) {
+      goBack();
     } else if (keycode === keyboard.BACK) {
       goBack();
     }
@@ -57,25 +63,40 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
   return (
     <div className="product-details-wrapper">
       <h2>{t(product.title)}</h2>
-      <div className="product-details-content" ref={outerRef}>
+      <div className="product-details-content">
         <div
-          className="product-details-scroller"
-          style={{ display: showThumb ? "block" : "none" }}
-        >
-          <div
-            style={{
-              height: `${heightTrack}px`,
-              transform: `translate(0, ${Math.max(0, translateTrackY)}px)`,
-            }}
-          />
+          className="image"
+          style={{ backgroundImage: `url(${product.imgDetails})` }}
+        />
+        <div className="content">
+          <div className="product-description-content" ref={outerRef}>
+            <div
+              className="product-description-scroller"
+              style={{ display: showThumb ? "block" : "none" }}
+            >
+              <div
+                style={{
+                  height: `${heightTrack}px`,
+                  transform: `translate(0, ${Math.max(0, translateTrackY)}px)`,
+                }}
+              />
+            </div>
+            <div
+              className="product-description-inner"
+              ref={innerRef}
+              style={{
+                transform: `translate(0, ${translatePanelY}px)`,
+              }}
+              dangerouslySetInnerHTML={{ __html: product.description ?? "" }}
+            />
+          </div>
+          <div className="product-actions">
+            {product.orderCount && (
+              <Quantity>{t(product.orderUnit ?? "")}</Quantity>
+            )}
+            {product.orderType && <Button>{t(product.orderType)}</Button>}
+          </div>
         </div>
-        <div
-          className="product-details-inner"
-          ref={innerRef}
-          style={{
-            transform: `translate(0, ${translatePanelY}px)`,
-          }}
-        ></div>
       </div>
     </div>
   );

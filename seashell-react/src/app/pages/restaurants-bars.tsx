@@ -1,4 +1,8 @@
-import { ECategoryItemType, TCategoryItem } from "../components/CategoryList";
+import {
+  ECategoryItemType,
+  EOrderType,
+  TCategoryItem,
+} from "../components/CategoryList";
 import Category from "../components/Category";
 import LeftBottomButtons from "../components/LeftBottomButtons";
 import RightBottomButtons from "../components/RightBottomButtons";
@@ -21,6 +25,8 @@ const responseData: TCategoryItem[] = [
     imgDetails: imgLoungeDetails,
     type: ECategoryItemType.category,
     parentId: "bars",
+    description:
+      "<p>In the extremely comfortable Lounge Bar you can relax and unwind, enjoying a choice of delicious coffees and teas, fruit juices and various drinks and snacks.</p><br/><p><strong>Open:</strong></br/>Daily 10am - 2pm</p>",
   },
   {
     id: "bars002",
@@ -30,6 +36,8 @@ const responseData: TCategoryItem[] = [
     imgDetails: imgItablianDetails,
     type: ECategoryItemType.category,
     parentId: "bars",
+    description:
+      "<p>We welcome you to visit The Italian cafe. The Italian Cafe is a place to meet, to sit inside or out, somewhat to see and be seen.</p><br/><p><strong>Open:</strong></br/>Daily 9am - 11pm</p>",
   },
   {
     id: "bars003",
@@ -39,6 +47,8 @@ const responseData: TCategoryItem[] = [
     imgDetails: imgLobbyDetails,
     type: ECategoryItemType.category,
     parentId: "bars",
+    description:
+      "<p>The Lobby Bar offers cocktails, delectable bar food and rich selections of whiskeys.</p><br/><p><strong>Open:</strong><br/>24 hours a day</p>",
   },
   {
     id: "bars004",
@@ -48,6 +58,11 @@ const responseData: TCategoryItem[] = [
     imgDetails: imgAsiaDetails,
     type: ECategoryItemType.category,
     parentId: "bars",
+    description:
+      "<p>The restaurant was voted Best Asian restaurant and 37th best in the world. Celebrity guests include Steve Jobs and Elon Musk visited the restaurant.</p>",
+    orderCount: true,
+    orderUnit: "pers",
+    orderType: EOrderType.selectTime,
   },
 ];
 

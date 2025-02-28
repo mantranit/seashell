@@ -55,6 +55,11 @@ i18n.use(initReactI18next).init({
         Language: "Language",
         Back: "Back",
         Navigation: "Navigation",
+
+        pers: "pers",
+        "Select time": "Select time",
+        Continue: "Continue",
+        "Add to cart": "Add to cart",
       },
     },
     vi: {
