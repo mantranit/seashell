@@ -30,6 +30,7 @@ export type TCategoryItem = {
   orderQuantity?: boolean;
   orderUnit?: string;
   orderType?: EOrderType;
+  duration?: string;
 };
 
 type TCategoryListProps = {
