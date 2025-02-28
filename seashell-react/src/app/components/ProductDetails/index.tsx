@@ -5,6 +5,7 @@ import { t } from "i18next";
 import { TCategoryItem } from "../CategoryList";
 import Button from "../Button";
 import Quantity from "../Quantity";
+import ProductTime from "../ProductTime";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
@@ -91,7 +92,8 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
             />
           </div>
           <div className="product-actions">
-            {product.orderCount && (
+            <ProductTime product={product} />
+            {product.orderQuantity && (
               <Quantity>{t(product.orderUnit ?? "")}</Quantity>
             )}
             {product.orderType && <Button>{t(product.orderType)}</Button>}

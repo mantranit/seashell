@@ -27,7 +27,7 @@ export type TCategoryItem = {
   tags?: string[];
   price?: number;
   parentId: null | number | string;
-  orderCount?: boolean;
+  orderQuantity?: boolean;
   orderUnit?: string;
   orderType?: EOrderType;
 };
