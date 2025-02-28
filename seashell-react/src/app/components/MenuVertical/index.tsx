@@ -37,7 +37,6 @@ const itemWidth = (1280 - 100) / totalItemShowed;
 function MenuVertical() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cursor, setCursor] = useState(0);
-  const [currentSlider, setCurrentSlider] = useState(0);
   const navigate = useNavigate();
 
   const handleKeyDown = (event: any) => {
@@ -58,12 +57,6 @@ function MenuVertical() {
       });
       setCursor((currentCursor) => {
         if (currentCursor + 1 > totalItemShowed - 1) {
-          setCurrentSlider(
-            Math.max(
-              currentSlider - itemWidth,
-              -(menu.length - totalItemShowed) * itemWidth
-            )
-          );
           return totalItemShowed - 1;
         } else {
           return currentCursor + 1;
@@ -79,7 +72,6 @@ function MenuVertical() {
       });
       setCursor((currentCursor) => {
         if (currentCursor - 1 < 0) {
-          setCurrentSlider(Math.min(currentSlider + itemWidth, 0));
           return 0;
         } else {
           return currentCursor - 1;
@@ -97,6 +89,21 @@ function MenuVertical() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [currentIndex]);
+
+  useEffect(() => {
+    const key = "menu-vertical";
+    const jsonString = localStorage.getItem(key) || "{}";
+    const jsonData = JSON.parse(jsonString);
+    if (jsonData.currentIndex) {
+      setCurrentIndex(jsonData.currentIndex);
+      setCursor(jsonData.cursor);
+    }
+  }, []);
+
+  useEffect(() => {
+    const key = "menu-vertical";
+    localStorage.setItem(key, JSON.stringify({ currentIndex, cursor }));
+  }, [currentIndex, cursor]);
 
   return (
     <div className="menu-container">
@@ -128,7 +135,7 @@ function MenuVertical() {
         <div
           className="menu-scroller"
           style={{
-            transform: `translateX(${currentSlider}px)`,
+            transform: `translateX(${-(currentIndex - cursor) * itemWidth}px)`,
           }}
         >
           {menu.map((item, index) => {
