@@ -32,7 +32,7 @@ function LeftBottomButtons({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
   return (
     <div className="left-bottom-buttons-wrapper">

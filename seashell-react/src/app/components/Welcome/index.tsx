@@ -24,7 +24,7 @@ function Welcome() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
   return (
     <div className="welcome-wrapper">

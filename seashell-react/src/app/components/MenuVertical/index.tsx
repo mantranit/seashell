@@ -88,7 +88,7 @@ function MenuVertical() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentIndex]);
+  });
 
   useEffect(() => {
     const key = "menu-vertical";

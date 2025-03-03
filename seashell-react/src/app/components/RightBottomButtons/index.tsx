@@ -39,7 +39,7 @@ function RightBottomButtons() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  });
 
   return (
     <div className="right-bottom-buttons-wrapper">

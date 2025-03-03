@@ -65,7 +65,7 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [heightContent, heightThumb, defaultCursor]);
+  });
 
   // calculateScroller
   useEffect(() => {
