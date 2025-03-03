@@ -50,7 +50,6 @@ type TCategoryListProps = {
 const itemWidth = 390;
 const itemHeight = 158;
 const itemInARow = 2;
-const heightThumb = 452;
 const borderCursorWith = 3;
 const gap = 20;
 
@@ -60,11 +59,11 @@ function CategoryList({
   goNext,
   goBack,
 }: TCategoryListProps) {
-  const { title, list, startCursorX, startCursorY } = data;
-  const [heightTrack, setHeightTrack] = useState(100);
-  const [cursorX, setCursorX] = useState(startCursorX);
-  const [cursorY, setCursorY] = useState(startCursorY);
-  const [showThumb, setShowThumb] = useState(false);
+  const { title, list } = data;
+  const [heightContent, setHeightContent] = useState(452);
+  const [heightThumb, setHeightThumb] = useState(452);
+  const [cursorX, setCursorX] = useState(data.startCursorX);
+  const [cursorY, setCursorY] = useState(data.startCursorY);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
@@ -78,7 +77,12 @@ function CategoryList({
 
     if (keycode === keyboard.RIGHT) {
       setCursorX((currenValue) => {
-        return Math.min(currenValue + 1, itemInARow - 1);
+        const nextCursorX = Math.min(currenValue + 1, itemInARow - 1);
+        if (!data.list[nextCursorX + cursorY * itemInARow]) {
+          return currenValue;
+        } else {
+          return nextCursorX;
+        }
       });
     } else if (keycode === keyboard.LEFT) {
       setCursorX((currenValue) => {
@@ -90,10 +94,14 @@ function CategoryList({
       });
     } else if (keycode === keyboard.BOTTOM) {
       setCursorY((currenValue) => {
-        return Math.min(
+        const nextCursorY = Math.min(
           currenValue + 1,
           Math.ceil(list.length / itemInARow) - 1
         );
+        if (!data.list[cursorX + nextCursorY * itemInARow] && cursorX > 0) {
+          setCursorX(cursorX - 1);
+        }
+        return nextCursorY;
       });
     } else if (keycode === keyboard.ENTER) {
       const nextItem = list[cursorX + cursorY * itemInARow];
@@ -104,29 +112,32 @@ function CategoryList({
   };
 
   useEffect(() => {
-    cursorXYChanged({ cursorX, cursorY });
-    if (!list[cursorX + cursorY * itemInARow] && cursorX > 0) {
-      setCursorX(cursorX - 1);
-    }
-
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [cursorX, cursorY]);
+  });
+
+  useEffect(() => {
+    setCursorX(data.startCursorX);
+    setCursorY(data.startCursorY);
+  }, [data.startCursorX, data.startCursorY]);
 
   // calculateScroller
   useEffect(() => {
     if (outerRef?.current && innerRef?.current) {
       const { height: outerHeight } = outerRef.current.getBoundingClientRect();
       const { height: innerHeight } = innerRef.current.getBoundingClientRect();
-      if (outerHeight < innerHeight) {
-        setShowThumb(true);
-        setHeightTrack((outerHeight / innerHeight) * heightThumb);
-      }
+      setHeightThumb(outerHeight);
+      setHeightContent(innerHeight);
     }
-  }, []);
+  }, [data.list]);
 
+  useEffect(() => {
+    cursorXYChanged({ cursorX, cursorY });
+  }, [cursorX, cursorY]);
+
+  const heightTrack = (heightThumb / heightContent) * heightThumb;
   const translateCursorX = cursorX * (itemWidth + gap) + gap / 2;
   const translateCursorY = Math.min(
     heightThumb - itemHeight - borderCursorWith * 2,
@@ -146,7 +157,7 @@ function CategoryList({
       <div className="category-content" ref={outerRef}>
         <div
           className="category-scroller"
-          style={{ display: showThumb ? "block" : "none" }}
+          style={{ display: heightThumb < heightContent ? "block" : "none" }}
         >
           <div
             style={{

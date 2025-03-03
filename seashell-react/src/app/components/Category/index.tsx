@@ -104,7 +104,6 @@ function Category({ responseData, initView }: TCategoryProps) {
   if (data.list.length > 0) {
     return (
       <CategoryList
-        key={JSON.stringify(currentViewed)}
         data={data}
         cursorXYChanged={cursorXYChanged}
         goNext={goNext}
