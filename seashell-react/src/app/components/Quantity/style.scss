@@ -12,6 +12,8 @@
   color: white;
   text-align: center;
   &.quantity--active {
+    width: 399px;
+    height: 59px;
     margin: 0;
     border: 3px solid #2459ab;
     animation: tv_cur_live 2s ease-in-out infinite alternate;

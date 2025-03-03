@@ -12,9 +12,14 @@ type TProductDetailsProps = {
   goBack: Function;
 };
 
-const heightThumb = 452;
+const stepScroll = 30;
+const points = ["orderQuatity", "orderType"];
 
 const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
+  const [defaultCursor, setDefaultCursor] = useState(points.length - 1);
+  const [translatePanelTime, setTranslatePanelTime] = useState(0);
+  const [heightContent, setHeightContent] = useState(452);
+  const [heightThumb, setHeightThumb] = useState(452);
   const [heightTrack, setHeightTrack] = useState(100);
   const [showThumb, setShowThumb] = useState(false);
   const outerRef = useRef<HTMLDivElement>(null);
@@ -31,7 +36,23 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
     if (keycode === keyboard.RIGHT) {
     } else if (keycode === keyboard.LEFT) {
     } else if (keycode === keyboard.TOP) {
+      setDefaultCursor((currentCursor) => Math.max(0, currentCursor - 1));
+      setTranslatePanelTime((currentTranslateTime) => {
+        if (0 > currentTranslateTime * stepScroll) {
+          return currentTranslateTime + 1;
+        }
+        return currentTranslateTime;
+      });
     } else if (keycode === keyboard.BOTTOM) {
+      setDefaultCursor((currentCursor) =>
+        Math.min(points.length - 1, currentCursor + 1)
+      );
+      setTranslatePanelTime((currentTranslateTime) => {
+        if (heightThumb - heightContent < currentTranslateTime * stepScroll) {
+          return currentTranslateTime - 1;
+        }
+        return currentTranslateTime;
+      });
     } else if (keycode === keyboard.ENTER) {
       goBack();
     } else if (keycode === keyboard.BACK) {
@@ -44,23 +65,25 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [heightContent, heightThumb, defaultCursor]);
 
   // calculateScroller
   useEffect(() => {
     if (outerRef?.current && innerRef?.current) {
       const { height: outerHeight } = outerRef.current.getBoundingClientRect();
       const { height: innerHeight } = innerRef.current.getBoundingClientRect();
+      setHeightThumb(outerHeight);
+      setHeightContent(innerHeight);
       if (outerHeight < innerHeight) {
         setShowThumb(true);
-        setHeightTrack((outerHeight / innerHeight) * heightThumb);
+        setHeightTrack((outerHeight / innerHeight) * outerHeight);
       }
     }
   }, []);
 
-  const translateTrackY = heightThumb - heightTrack;
-  const translatePanelY = 0;
-
+  const translateTrackY =
+    translatePanelTime * (heightTrack / heightThumb) * stepScroll;
+  const translatePanelY = translatePanelTime * stepScroll;
   return (
     <div className="product-details-wrapper">
       <h2>{t(product.title)}</h2>
@@ -78,7 +101,7 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
               <div
                 style={{
                   height: `${heightTrack}px`,
-                  transform: `translate(0, ${Math.max(0, translateTrackY)}px)`,
+                  transform: `translate(0, ${Math.max(0, -translateTrackY)}px)`,
                 }}
               />
             </div>
@@ -94,9 +117,15 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
           <div className="product-actions">
             <ProductTime product={product} />
             {product.orderQuantity && (
-              <Quantity>{t(product.orderUnit ?? "")}</Quantity>
+              <Quantity isActive={points[defaultCursor] === "orderQuatity"}>
+                {t(product.orderUnit ?? "")}
+              </Quantity>
             )}
-            {product.orderType && <Button>{t(product.orderType)}</Button>}
+            {product.orderType && (
+              <Button isActive={points[defaultCursor] === "orderType"}>
+                {t(product.orderType)}
+              </Button>
+            )}
           </div>
         </div>
       </div>
