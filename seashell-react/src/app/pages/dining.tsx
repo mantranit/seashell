@@ -1,4 +1,8 @@
-import { ECategoryItemType, TCategoryItem } from "../components/CategoryList";
+import {
+  ECategoryItemType,
+  EOrderType,
+  TCategoryItem,
+} from "../components/CategoryList";
 import Category from "../components/Category";
 import LeftBottomButtons from "../components/LeftBottomButtons";
 import RightBottomButtons from "../components/RightBottomButtons";
@@ -36,12 +40,33 @@ const responseData: TCategoryItem[] = [
     title: "Oatmeal Breakfast",
     time: "07:00-11:00",
     img: imgBreakfastsOatmeal,
+    imgDetails: imgBreakfastsOatmeal,
     type: ECategoryItemType.subcategory,
     description:
       "Our Oatmeal is served warm with your choice of Fried Apples, Pecans, Raisins, Fresh Sliced Bananas or 100% Pure Natural Syrup.",
     tags: ["Vegan"],
     price: 16,
     parentId: "dining001",
+    orderQuantity: 1,
+    orderUnit: "",
+    orderType: EOrderType.chooseOptions,
+    orderOptions: [
+      {
+        name: "Double Size (600g)",
+        price: 4,
+      },
+      {
+        name: "Choose Your Topping",
+        price: 3,
+        select: [
+          "None",
+          "Fried Apples",
+          "Sliced Banana",
+          "100% Pure Natural Syrup",
+          "Pecan",
+        ],
+      },
+    ],
   },
   {
     id: "dining00102",

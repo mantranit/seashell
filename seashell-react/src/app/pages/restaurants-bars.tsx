@@ -60,7 +60,7 @@ const responseData: TCategoryItem[] = [
     parentId: "bars",
     description:
       "<p>The restaurant was voted Best Asian restaurant and 37th best in the world. Celebrity guests include Steve Jobs and Elon Musk visited the restaurant.</p>",
-    orderQuantity: true,
+    orderQuantity: 2,
     orderUnit: "pers",
     orderType: EOrderType.selectTime,
   },

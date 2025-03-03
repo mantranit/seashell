@@ -9,6 +9,7 @@ export enum EOrderType {
   selectTime = "Select time",
   continue = "Continue",
   addToCart = "Add to cart",
+  chooseOptions = "Choose options",
 }
 
 export enum ECategoryItemType {
@@ -27,9 +28,10 @@ export type TCategoryItem = {
   tags?: string[];
   price?: number;
   parentId: null | number | string;
-  orderQuantity?: boolean;
+  orderQuantity?: number;
   orderUnit?: string;
   orderType?: EOrderType;
+  orderOptions?: any[];
   duration?: string;
 };
 

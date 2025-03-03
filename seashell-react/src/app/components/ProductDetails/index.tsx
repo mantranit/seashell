@@ -117,7 +117,10 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
           <div className="product-actions">
             <ProductTime product={product} />
             {product.orderQuantity && (
-              <Quantity isActive={points[defaultCursor] === "orderQuatity"}>
+              <Quantity
+                isActive={points[defaultCursor] === "orderQuatity"}
+                initValue={product.orderQuantity}
+              >
                 {t(product.orderUnit ?? "")}
               </Quantity>
             )}
