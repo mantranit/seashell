@@ -19,6 +19,12 @@
     animation: tv_cur_live 2s ease-in-out infinite alternate;
     border-radius: 10px;
   }
+  .has-price & {
+    width: 202px;
+    &.quantity--active {
+      width: 206px;
+    }
+  }
   .count {
     flex-grow: 1;
   }

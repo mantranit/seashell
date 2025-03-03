@@ -6,6 +6,7 @@ import { TCategoryItem } from "../CategoryList";
 import Button from "../Button";
 import Quantity from "../Quantity";
 import ProductTime from "../ProductTime";
+import { formatCurrency } from "../../utils";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
@@ -116,14 +117,21 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
           </div>
           <div className="product-actions">
             <ProductTime product={product} />
-            {product.orderQuantity && (
-              <Quantity
-                isActive={points[defaultCursor] === "orderQuatity"}
-                initValue={product.orderQuantity}
-              >
-                {t(product.orderUnit ?? "")}
-              </Quantity>
-            )}
+            <div
+              className={`price-quatity ${product.price ? "has-price" : ""}`}
+            >
+              {product.price && (
+                <div className="price">{formatCurrency(product.price)}</div>
+              )}
+              {product.orderQuantity && (
+                <Quantity
+                  isActive={points[defaultCursor] === "orderQuatity"}
+                  initValue={product.orderQuantity}
+                >
+                  {t(product.orderUnit ?? "")}
+                </Quantity>
+              )}
+            </div>
             {product.orderType && (
               <Button isActive={points[defaultCursor] === "orderType"}>
                 {t(product.orderType)}

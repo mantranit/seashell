@@ -1,3 +1,4 @@
+import { formatCurrency } from "../../utils";
 import { TCategoryItem } from "../CategoryList";
 import "./style.scss";
 
@@ -29,12 +30,7 @@ function SubCategoryItem({
                 <span key={tag}>{tag}</span>
               ))}
             </p>
-            <p className="price">
-              {(item.price ?? 0).toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </p>
+            <p className="price">{item.price && formatCurrency(item.price)}</p>
           </div>
         </div>
       </div>
