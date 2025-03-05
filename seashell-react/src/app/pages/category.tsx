@@ -7,6 +7,7 @@ import RightBottomButtons from "../components/RightBottomButtons";
 import { responseDining } from "../../_mock/dining";
 import { responseRestaurantsBars } from "../../_mock/restautantsBars";
 import { menu } from "../../_mock/menu";
+import { responseSpaFitness } from "../../_mock/spaFitness";
 
 type TCategoryPageProps = {
   identity: string;
@@ -32,6 +33,8 @@ function CategoryPage({ identity }: TCategoryPageProps) {
       setProductList(responseDining);
     } else if (identity === "restaurants-bars") {
       setProductList(responseRestaurantsBars);
+    } else if (identity === "spa-fitness") {
+      setProductList(responseSpaFitness);
     }
   }, [identity]);
 

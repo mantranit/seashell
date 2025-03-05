@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { responseDining } from "../../_mock/dining";
 import { responseRestaurantsBars } from "../../_mock/restautantsBars";
+import { responseSpaFitness } from "../../_mock/spaFitness";
 
 type TProductPageProps = {
   identity: string;
@@ -20,6 +21,8 @@ function ProductPage({ identity }: TProductPageProps) {
       setProductList(responseDining);
     } else if (identity === "restaurants-bars") {
       setProductList(responseRestaurantsBars);
+    } else if (identity === "spa-fitness") {
+      setProductList(responseSpaFitness);
     }
   }, []);
 
