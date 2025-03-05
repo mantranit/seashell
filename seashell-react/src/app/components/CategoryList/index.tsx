@@ -106,11 +106,35 @@ function CategoryList({
       });
     } else if (keycode === keyboard.ENTER) {
       const nextItem = list[cursorX + cursorY * itemInARow];
+      initTransition();
       goNext(nextItem);
     } else if (keycode === keyboard.BACK) {
+      initTransition();
       goBack();
     }
   };
+
+  // disable transition when mounted
+  const initTransition = () => {
+    if (innerRef.current) {
+      innerRef.current.style.transition = "none";
+    }
+    if (cursorRef.current) {
+      cursorRef.current.style.transition = "none";
+    }
+    setTimeout(() => {
+      if (innerRef.current) {
+        innerRef.current.style.transition = "all 0.2s ease-in";
+      }
+      if (cursorRef.current) {
+        cursorRef.current.style.transition = "all 0.2s ease-in";
+      }
+    }, 500);
+  };
+
+  useEffect(() => {
+    initTransition();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -137,18 +161,6 @@ function CategoryList({
   useEffect(() => {
     cursorXYChanged({ cursorX, cursorY });
   }, [cursorX, cursorY]);
-
-  // disable transition when mounted
-  useEffect(() => {
-    setTimeout(() => {
-      if (innerRef.current) {
-        innerRef.current.style.transition = "all 0.2s ease-in";
-      }
-      if (cursorRef.current) {
-        cursorRef.current.style.transition = "all 0.2s ease-in";
-      }
-    }, 500);
-  }, []);
 
   const heightTrack = (heightThumb / heightContent) * heightThumb;
   const translateCursorX = cursorX * (itemWidth + gap) + gap / 2;
