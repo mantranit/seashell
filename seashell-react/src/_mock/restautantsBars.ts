@@ -23,7 +23,7 @@ export const responseRestaurantsBars: TCategoryItem[] = [
     type: ECategoryItemType.category,
     parentId: "restaurants-bars",
     description:
-      "<p>In the extremely comfortable Lounge Bar you can relax and unwind, enjoying a choice of delicious coffees and teas, fruit juices and various drinks and snacks.</p><br/><p><strong>Open:</strong></br/>Daily 10am - 2pm</p>",
+      "<p>In the extremely comfortable Lounge Bar you can relax and unwind, enjoying a choice of delicious coffees and teas, fruit juices and various drinks and snacks.</p><p><strong>Open:</strong></br/>Daily 10am - 2pm</p>",
   },
   {
     id: "bars002",
@@ -34,7 +34,7 @@ export const responseRestaurantsBars: TCategoryItem[] = [
     type: ECategoryItemType.category,
     parentId: "restaurants-bars",
     description:
-      "<p>We welcome you to visit The Italian cafe. The Italian Cafe is a place to meet, to sit inside or out, somewhat to see and be seen.</p><br/><p><strong>Open:</strong></br/>Daily 9am - 11pm</p>",
+      "<p>We welcome you to visit The Italian cafe. The Italian Cafe is a place to meet, to sit inside or out, somewhat to see and be seen.</p><p><strong>Open:</strong></br/>Daily 9am - 11pm</p>",
   },
   {
     id: "bars003",
@@ -45,7 +45,7 @@ export const responseRestaurantsBars: TCategoryItem[] = [
     type: ECategoryItemType.category,
     parentId: "restaurants-bars",
     description:
-      "<p>The Lobby Bar offers cocktails, delectable bar food and rich selections of whiskeys.</p><br/><p><strong>Open:</strong><br/>24 hours a day</p>",
+      "<p>The Lobby Bar offers cocktails, delectable bar food and rich selections of whiskeys.</p><p><strong>Open:</strong><br/>24 hours a day</p>",
   },
   {
     id: "bars004",

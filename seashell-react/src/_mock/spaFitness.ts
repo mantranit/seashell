@@ -12,6 +12,7 @@ import imgSauna from "../assets/categories/spa/sauna.jpg";
 import imgSaunaDetails from "../assets/categories/bars/lobby-details.jpg";
 import imgGym from "../assets/categories/spa/gym.jpg";
 import imgGym01 from "../assets/categories/spa/gym01.jpg";
+import imgGym01Details from "../assets/categories/spa/gym01details.jpg";
 import imgGym02Details from "../assets/categories/spa/gym02details.jpg";
 
 export const responseSpaFitness: TCategoryItem[] = [
@@ -52,8 +53,11 @@ export const responseSpaFitness: TCategoryItem[] = [
     title: "Gym Program",
     time: "",
     img: imgGym01,
+    imgDetails: imgGym01Details,
     type: ECategoryItemType.category,
     parentId: "spa-fitness004",
+    description:
+      "<p>Our charming compact SPA offers you a well-equipped fitness room with state-of-the-art cardiovascular equipment. The machines available include treadmills and bikes, and our fitness area offers you the Power Plate®. This high-quality exercising machine operates on the principle of vibration and is suitable for people of all ages.</p><p>If you’d like to be more active and reduce health issues such as back pain, cardiovascular problems and stress, we’d suggest you to try individual exercise with our professional personal trainer. Consistent training that suit your needs will make you feel better, look better and sleep better.</p>",
   },
   {
     id: "spa-fitness00402",
@@ -64,7 +68,7 @@ export const responseSpaFitness: TCategoryItem[] = [
     type: ECategoryItemType.category,
     parentId: "spa-fitness004",
     description:
-      "<p>Our charming compact SPA offers you a well-equipped fitness room with state-of-the-art cardiovascular equipment.The machines available include treadmills and bikes, and our fitness area offers you the Power Plate®. This high-quality exercising machine operates on the principle of vibration and is suitable for people of all ages.</p><p>If you’d like to be more active and reduce health issues such as back pain, cardiovascular problems and stress, we’d suggest you to try individual exercise with our professional personal trainer. Consistent training that suit your needs will make you feel better, look better and sleep better.</p><br/><p><b><i>Duration: 30 min</i></b></p>",
+      "<p>Our charming compact SPA offers you a well-equipped fitness room with state-of-the-art cardiovascular equipment.The machines available include treadmills and bikes, and our fitness area offers you the Power Plate®. This high-quality exercising machine operates on the principle of vibration and is suitable for people of all ages.</p><p>If you’d like to be more active and reduce health issues such as back pain, cardiovascular problems and stress, we’d suggest you to try individual exercise with our professional personal trainer. Consistent training that suit your needs will make you feel better, look better and sleep better.</p><p><b><i>Duration: 30 min</i></b></p>",
     orderType: EOrderType.chooseOptions,
   },
 ];
