@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Category from "../components/Category";
+import Category, { TView } from "../components/Category";
 import { TCategoryItem } from "../components/CategoryList";
 import LeftBottomButtons from "../components/LeftBottomButtons";
 import RightBottomButtons from "../components/RightBottomButtons";
@@ -14,22 +14,18 @@ type TCategoryPageProps = {
 
 function CategoryPage({ identity }: TCategoryPageProps) {
   const [productList, setProductList] = useState<TCategoryItem[]>([]);
-  const [initView, setInitView] = useState({
-    id: identity,
-    path: "/dining",
-    title: "Dining",
-    parentId: null,
-    startCursorX: 0,
-    startCursorY: 0,
-  });
+  const [initView, setInitView] = useState<TView | null>(null);
 
   useEffect(() => {
     const currentMenu = menu.find((item) => item.id === identity);
     if (currentMenu) {
       setInitView({
-        ...initView,
+        id: identity,
         path: currentMenu.path,
         title: currentMenu.text,
+        parentId: null,
+        startCursorX: 0,
+        startCursorY: 0,
       });
     }
     if (identity === "dining") {
@@ -37,11 +33,11 @@ function CategoryPage({ identity }: TCategoryPageProps) {
     } else if (identity === "restaurants-bars") {
       setProductList(responseRestaurantsBars);
     }
-  }, []);
+  }, [identity]);
 
   return (
     <div className="page category-page">
-      <Category responseData={productList} initView={initView} />
+      {initView && <Category responseData={productList} initView={initView} />}
       <LeftBottomButtons showNavigation={true} />
       <RightBottomButtons />
     </div>

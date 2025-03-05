@@ -47,13 +47,41 @@ function App() {
             path="restaurants-bars/:productId"
             element={<ProductPage identity="restaurants-bars" />}
           />
-          <Route path="spa-fitness" element={<SpaFitness />} />
-          <Route path="shopping" element={<Shopping />} />
+          <Route
+            path="spa-fitness"
+            element={<CategoryPage identity="spa-fitness" />}
+          />
+          <Route
+            path="spa-fitness/:productId"
+            element={<ProductPage identity="spa-fitness" />}
+          />
+          <Route
+            path="shopping"
+            element={<CategoryPage identity="shopping" />}
+          />
+          <Route
+            path="shopping/:productId"
+            element={<ProductPage identity="shopping" />}
+          />
           <Route path="my-orders" element={<MyOrders />} />
           <Route path="movies" element={<Movies />} />
           <Route path="radio" element={<Radio />} />
-          <Route path="hotel-information" element={<HotelInformation />} />
-          <Route path="room-service" element={<RoomService />} />
+          <Route
+            path="hotel-information"
+            element={<CategoryPage identity="hotel-information" />}
+          />
+          <Route
+            path="hotel-information/:productId"
+            element={<ProductPage identity="hotel-information" />}
+          />
+          <Route
+            path="room-service"
+            element={<CategoryPage identity="room-service" />}
+          />
+          <Route
+            path="room-service/:productId"
+            element={<ProductPage identity="room-service" />}
+          />
           <Route path="wake-up-call" element={<WakeUpCall />} />
           <Route path="messages" element={<Messages />} />
           <Route path="feedback" element={<Feedback />} />

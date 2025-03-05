@@ -163,7 +163,7 @@ export const menu = [
     path: "/radio",
   },
   {
-    id: "information",
+    id: "hotel-information",
     icon: (
       <svg
         id="icon-info"
@@ -181,7 +181,7 @@ export const menu = [
     path: "/hotel-information",
   },
   {
-    id: "services",
+    id: "room-service",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

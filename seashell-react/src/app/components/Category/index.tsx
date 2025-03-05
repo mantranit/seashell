@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CategoryList, { TCategoryItem } from "../CategoryList";
 
-type TView = {
+export type TView = {
   id: number | string;
   path?: string;
   title: string;
