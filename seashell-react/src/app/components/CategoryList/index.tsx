@@ -66,6 +66,7 @@ function CategoryList({
   const [cursorY, setCursorY] = useState(data.startCursorY);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (event: any) => {
     let keycode;
@@ -137,6 +138,18 @@ function CategoryList({
     cursorXYChanged({ cursorX, cursorY });
   }, [cursorX, cursorY]);
 
+  // disable transition when mounted
+  useEffect(() => {
+    setTimeout(() => {
+      if (innerRef.current) {
+        innerRef.current.style.transition = "all 0.2s ease-in";
+      }
+      if (cursorRef.current) {
+        cursorRef.current.style.transition = "all 0.2s ease-in";
+      }
+    }, 500);
+  }, []);
+
   const heightTrack = (heightThumb / heightContent) * heightThumb;
   const translateCursorX = cursorX * (itemWidth + gap) + gap / 2;
   const translateCursorY = Math.min(
@@ -168,6 +181,7 @@ function CategoryList({
         </div>
         <div
           className="category-cursor"
+          ref={cursorRef}
           style={{
             width: itemWidth + borderCursorWith * 2,
             height: itemHeight + borderCursorWith * 2,

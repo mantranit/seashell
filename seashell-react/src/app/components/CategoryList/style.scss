@@ -37,11 +37,11 @@
       animation: tv_cur_live 2s ease-in-out infinite alternate;
       z-index: 5;
       margin: -3px 0 0 -3px;
-      transition: all 0.2s ease-in;
+      // transition: all 0.2s ease-in;
     }
     .category-list {
       overflow: hidden;
-      transition: all 0.2s ease-in;
+      // transition: all 0.2s ease-in;
     }
   }
 }

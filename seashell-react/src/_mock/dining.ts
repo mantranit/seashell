@@ -2,30 +2,27 @@ import {
   ECategoryItemType,
   EOrderType,
   TCategoryItem,
-} from "../components/CategoryList";
-import Category from "../components/Category";
-import LeftBottomButtons from "../components/LeftBottomButtons";
-import RightBottomButtons from "../components/RightBottomButtons";
+} from "../app/components/CategoryList";
 
-import imgBreakfasts from "../../assets/categories/dining/breakfasts.jpg";
-import imgBreakfastsOatmeal from "../../assets/categories/dining/oatmeal-breakfast.jpg";
-import imgBreakfastsPecan from "../../assets/categories/dining/pecan-pancakes.jpg";
-import imgBreakfastsFrench from "../../assets/categories/dining/french-toast.jpg";
-import imgBreakfastsBiscuits from "../../assets/categories/dining/biscuits-with-bacon.jpg";
-import imgStarters from "../../assets/categories/dining/starters.jpg";
-import imgSalads from "../../assets/categories/dining/salads.jpg";
-import imgSoups from "../../assets/categories/dining/soups.jpg";
-import imgMains from "../../assets/categories/dining/mains.jpg";
-import imgDesserts from "../../assets/categories/dining/desserts.jpg";
-import imgDrinks from "../../assets/categories/dining/drinks.jpg";
-import imgHotDrinks from "../../assets/categories/dining/hot-drinks.jpg";
-import imgAlcohol from "../../assets/categories/dining/alcohol.jpg";
-import imgAlcoholCocktails from "../../assets/categories/dining/alcohol-cocktails.jpg";
-import imgAlcoholBeer from "../../assets/categories/dining/alcohol-beer.jpg";
-import imgAlcoholWine from "../../assets/categories/dining/alcohol-wine.jpg";
-import imgAlcoholWhiskey from "../../assets/categories/dining/alcohol-whiskey.jpg";
+import imgBreakfasts from "../assets/categories/dining/breakfasts.jpg";
+import imgBreakfastsOatmeal from "../assets/categories/dining/oatmeal-breakfast.jpg";
+import imgBreakfastsPecan from "../assets/categories/dining/pecan-pancakes.jpg";
+import imgBreakfastsFrench from "../assets/categories/dining/french-toast.jpg";
+import imgBreakfastsBiscuits from "../assets/categories/dining/biscuits-with-bacon.jpg";
+import imgStarters from "../assets/categories/dining/starters.jpg";
+import imgSalads from "../assets/categories/dining/salads.jpg";
+import imgSoups from "../assets/categories/dining/soups.jpg";
+import imgMains from "../assets/categories/dining/mains.jpg";
+import imgDesserts from "../assets/categories/dining/desserts.jpg";
+import imgDrinks from "../assets/categories/dining/drinks.jpg";
+import imgHotDrinks from "../assets/categories/dining/hot-drinks.jpg";
+import imgAlcohol from "../assets/categories/dining/alcohol.jpg";
+import imgAlcoholCocktails from "../assets/categories/dining/alcohol-cocktails.jpg";
+import imgAlcoholBeer from "../assets/categories/dining/alcohol-beer.jpg";
+import imgAlcoholWine from "../assets/categories/dining/alcohol-wine.jpg";
+import imgAlcoholWhiskey from "../assets/categories/dining/alcohol-whiskey.jpg";
 
-const responseData: TCategoryItem[] = [
+export const responseDining: TCategoryItem[] = [
   {
     id: "dining001",
     category: [],
@@ -54,6 +51,7 @@ const responseData: TCategoryItem[] = [
       {
         name: "Double Size (600g)",
         price: 4,
+        yesNo: 0,
       },
       {
         name: "Choose Your Topping",
@@ -73,36 +71,55 @@ const responseData: TCategoryItem[] = [
     title: "Pecan Pancakes",
     time: "07:00-11:00",
     img: imgBreakfastsPecan,
+    imgDetails: imgBreakfastsPecan,
     type: ECategoryItemType.subcategory,
     description:
       "Three Buttermilk Pancakes loaded with pecans and served with real Butter and a warm bottle of 100% Pure Natural Syrup.",
     tags: ["Vegan"],
     price: 8,
     parentId: "dining001",
+    orderQuantity: 1,
+    orderUnit: "",
+    orderType: EOrderType.chooseOptions,
+    orderOptions: [
+      {
+        name: "Additional Pecan (10g)",
+        price: 2,
+        quantity: 0,
+      },
+    ],
   },
   {
     id: "dining00103",
     title: "French Toast",
     time: "07:00-11:00",
     img: imgBreakfastsFrench,
+    imgDetails: imgBreakfastsFrench,
     type: ECategoryItemType.subcategory,
     description:
       "Four slices of our own Sourdough Bread (regular or whole-wheat) dipped in egg then grilled to perfection. Served with any Fruit Topping or 100% Pure Natural Syrup.",
     tags: ["French Cuisine", "Vegan"],
     price: 11,
     parentId: "dining001",
+    orderQuantity: 1,
+    orderUnit: "",
+    orderType: EOrderType.continue,
   },
   {
     id: "dining00104",
     title: "Biscuits n' Gravy with Bacon",
     time: "07:00-11:00",
     img: imgBreakfastsBiscuits,
+    imgDetails: imgBreakfastsBiscuits,
     type: ECategoryItemType.subcategory,
     description:
       "Three buttermilk biscuits with sawmill gravy and thick-sliced bacon.",
     tags: ["French Cuisine"],
     price: 16,
     parentId: "dining001",
+    orderQuantity: 1,
+    orderUnit: "",
+    orderType: EOrderType.continue,
   },
   {
     id: "dining002",
@@ -673,25 +690,3 @@ const responseData: TCategoryItem[] = [
     parentId: "dining00804",
   },
 ];
-
-function Dining() {
-  return (
-    <div className="page restaurants-bars-page">
-      <Category
-        responseData={responseData}
-        initView={{
-          id: "dining",
-          path: "/dining",
-          title: "Dining",
-          parentId: null,
-          startCursorX: 0,
-          startCursorY: 0,
-        }}
-      />
-      <LeftBottomButtons showNavigation={true} />
-      <RightBottomButtons />
-    </div>
-  );
-}
-
-export default Dining;

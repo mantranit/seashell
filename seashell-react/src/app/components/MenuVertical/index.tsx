@@ -4,7 +4,7 @@ import iconBack from "../../../assets/icons/btn_arrow_left.png";
 import iconNext from "../../../assets/icons/btn_arrow_right.png";
 import { Link, useNavigate } from "react-router";
 import { t } from "i18next";
-import { menu } from "./menu";
+import { menu } from "../../../_mock/menu";
 import { keyboard } from "../../keyboard";
 
 type TMenuItemProps = {

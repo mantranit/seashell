@@ -4,11 +4,9 @@ import MainLayout from "./app/layouts/main";
 import Welcome from "./app/pages/welcome";
 import Home from "./app/pages/home";
 import Settings from "./app/pages/settings";
-import RestaurantsBars from "./app/pages/restaurants-bars";
 import Television from "./app/pages/television";
 import Connectivity from "./app/pages/connectivity";
 import SpaFitness from "./app/pages/spa-fitness";
-import Dining from "./app/pages/dining";
 import Shopping from "./app/pages/shopping";
 import MyOrders from "./app/pages/my-orders";
 import Movies from "./app/pages/movies";
@@ -23,7 +21,8 @@ import Flights from "./app/pages/flights";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import ProductDetailsPage from "./app/pages/product-details";
+import ProductPage from "./app/pages/product";
+import CategoryPage from "./app/pages/category";
 
 function App() {
   dayjs.extend(localizedFormat);
@@ -35,12 +34,18 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="television" element={<Television />} />
           <Route path="connectivity" element={<Connectivity />} />
-          <Route path="dining" element={<Dining />} />
-          <Route path="dining/:productId" element={<ProductDetailsPage />} />
-          <Route path="restaurants-bars" element={<RestaurantsBars />} />
+          <Route path="dining" element={<CategoryPage identity="dining" />} />
+          <Route
+            path="dining/:productId"
+            element={<ProductPage identity="dining" />}
+          />
+          <Route
+            path="restaurants-bars"
+            element={<CategoryPage identity="restaurants-bars" />}
+          />
           <Route
             path="restaurants-bars/:productId"
-            element={<ProductDetailsPage />}
+            element={<ProductPage identity="restaurants-bars" />}
           />
           <Route path="spa-fitness" element={<SpaFitness />} />
           <Route path="shopping" element={<Shopping />} />

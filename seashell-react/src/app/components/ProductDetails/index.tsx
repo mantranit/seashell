@@ -11,13 +11,12 @@ import { useNavigate } from "react-router";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
-  goBack: Function;
 };
 
 const stepScroll = 30;
 const points = ["orderQuatity", "orderType"];
 
-const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
+const ProductDetails = ({ product }: TProductDetailsProps) => {
   const navigate = useNavigate();
   const [defaultCursor, setDefaultCursor] = useState(points.length - 1);
   const [translatePanelTime, setTranslatePanelTime] = useState(0);
@@ -57,7 +56,7 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
         return currentTranslateTime;
       });
     } else if (keycode === keyboard.ENTER) {
-      goBack();
+      // goBack();
     } else if (keycode === keyboard.BACK) {
       navigate(-1);
     }

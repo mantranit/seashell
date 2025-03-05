@@ -55,7 +55,7 @@ export const menu = [
     path: "/dining",
   },
   {
-    id: "bars",
+    id: "restaurants-bars",
     icon: (
       <svg
         id="icon-bar"
@@ -73,7 +73,7 @@ export const menu = [
     path: "/restaurants-bars",
   },
   {
-    id: "spa",
+    id: "spa-fitness",
     icon: (
       <svg
         id="icon-towel"
