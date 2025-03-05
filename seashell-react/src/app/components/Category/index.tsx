@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CategoryList, { TCategoryItem } from "../CategoryList";
-import ProductDetails from "../ProductDetails";
 
 type TView = {
   id: number | string;
+  path?: string;
   title: string;
   parentId: null | number | string;
   startCursorX: number;
@@ -39,30 +39,37 @@ function Category({ responseData, initView }: TCategoryProps) {
   };
 
   const goNext = (nextItem: TCategoryItem) => {
-    const { id, title, parentId } = nextItem;
-    setViewed((currentViewed: any) => {
-      let nextViewItem;
-      const exist = trackingViewed.find((tracking) => tracking.id === id);
-      if (exist) {
-        nextViewItem = {
-          id,
-          title,
-          parentId,
-          startCursorX: exist.startCursorX,
-          startCursorY: exist.startCursorY,
-        };
-      } else {
-        nextViewItem = {
-          id,
-          title,
-          parentId,
-          startCursorX: 0,
-          startCursorY: 0,
-        };
-        setTrackingViewed([...trackingViewed, nextViewItem]);
-      }
-      return [...currentViewed, nextViewItem];
-    });
+    const hasCategory = responseData.filter(
+      (item) => item.parentId === nextItem.id
+    );
+    if (hasCategory.length === 0) {
+      navigate(`${initView.path}/${nextItem.id}`);
+    } else {
+      const { id, title, parentId } = nextItem;
+      setViewed((currentViewed: any) => {
+        let nextViewItem;
+        const exist = trackingViewed.find((tracking) => tracking.id === id);
+        if (exist) {
+          nextViewItem = {
+            id,
+            title,
+            parentId,
+            startCursorX: exist.startCursorX,
+            startCursorY: exist.startCursorY,
+          };
+        } else {
+          nextViewItem = {
+            id,
+            title,
+            parentId,
+            startCursorX: 0,
+            startCursorY: 0,
+          };
+          setTrackingViewed([...trackingViewed, nextViewItem]);
+        }
+        return [...currentViewed, nextViewItem];
+      });
+    }
   };
 
   const goBack = () => {
@@ -89,7 +96,7 @@ function Category({ responseData, initView }: TCategoryProps) {
   useEffect(() => {
     const key = initView.id.toString();
     localStorage.setItem(key, JSON.stringify({ viewed, trackingViewed }));
-  }, [trackingViewed]);
+  }, [viewed, trackingViewed]);
 
   const currentViewed = viewed[viewed.length - 1];
   const data = {
@@ -101,27 +108,14 @@ function Category({ responseData, initView }: TCategoryProps) {
     startCursorY: currentViewed.startCursorY,
   };
 
-  if (data.list.length > 0) {
-    return (
-      <CategoryList
-        data={data}
-        cursorXYChanged={cursorXYChanged}
-        goNext={goNext}
-        goBack={goBack}
-      />
-    );
-  } else {
-    const product = responseData.find((item) => item.id === currentViewed.id);
-    if (product) {
-      return (
-        <ProductDetails
-          key={JSON.stringify(currentViewed)}
-          goBack={goBack}
-          product={product}
-        />
-      );
-    }
-  }
+  return (
+    <CategoryList
+      data={data}
+      cursorXYChanged={cursorXYChanged}
+      goNext={goNext}
+      goBack={goBack}
+    />
+  );
 }
 
 export default Category;

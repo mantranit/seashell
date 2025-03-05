@@ -7,6 +7,7 @@ import Button from "../Button";
 import Quantity from "../Quantity";
 import ProductTime from "../ProductTime";
 import { formatCurrency } from "../../utils";
+import { useNavigate } from "react-router";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
@@ -17,6 +18,7 @@ const stepScroll = 30;
 const points = ["orderQuatity", "orderType"];
 
 const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
+  const navigate = useNavigate();
   const [defaultCursor, setDefaultCursor] = useState(points.length - 1);
   const [translatePanelTime, setTranslatePanelTime] = useState(0);
   const [heightContent, setHeightContent] = useState(452);
@@ -57,7 +59,7 @@ const ProductDetails = ({ product, goBack }: TProductDetailsProps) => {
     } else if (keycode === keyboard.ENTER) {
       goBack();
     } else if (keycode === keyboard.BACK) {
-      goBack();
+      navigate(-1);
     }
   };
 

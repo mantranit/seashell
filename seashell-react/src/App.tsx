@@ -23,6 +23,7 @@ import Flights from "./app/pages/flights";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import ProductDetailsPage from "./app/pages/product-details";
 
 function App() {
   dayjs.extend(localizedFormat);
@@ -35,7 +36,12 @@ function App() {
           <Route path="television" element={<Television />} />
           <Route path="connectivity" element={<Connectivity />} />
           <Route path="dining" element={<Dining />} />
+          <Route path="dining/:productId" element={<ProductDetailsPage />} />
           <Route path="restaurants-bars" element={<RestaurantsBars />} />
+          <Route
+            path="restaurants-bars/:productId"
+            element={<ProductDetailsPage />}
+          />
           <Route path="spa-fitness" element={<SpaFitness />} />
           <Route path="shopping" element={<Shopping />} />
           <Route path="my-orders" element={<MyOrders />} />

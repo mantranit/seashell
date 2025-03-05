@@ -73,6 +73,7 @@ function RestaurantsBars() {
         responseData={responseData}
         initView={{
           id: "bars",
+          path: "/restaurants-bars",
           title: "Restaurants & Bars",
           parentId: null,
           startCursorX: 0,

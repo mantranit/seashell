@@ -681,6 +681,7 @@ function Dining() {
         responseData={responseData}
         initView={{
           id: "dining",
+          path: "/dining",
           title: "Dining",
           parentId: null,
           startCursorX: 0,
