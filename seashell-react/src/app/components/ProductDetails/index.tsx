@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { keyboard } from "../../keyboard";
 import "./style.scss";
 import { t } from "i18next";
-import { TCategoryItem } from "../CategoryList";
+import { EOrderType, TCategoryItem } from "../CategoryList";
 import Button from "../Button";
 import Quantity from "../Quantity";
 import ProductTime from "../ProductTime";
 import { formatCurrency } from "../../utils";
 import { useNavigate } from "react-router";
+import SelectTime from "../SelectTime";
+import ChooseOptions from "../ChooseOptions";
 
 type TProductDetailsProps = {
   product: TCategoryItem;
@@ -23,8 +25,8 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
   const [translatePanelTime, setTranslatePanelTime] = useState(0);
   const [heightContent, setHeightContent] = useState(452);
   const [heightThumb, setHeightThumb] = useState(452);
-  const [heightTrack, setHeightTrack] = useState(100);
-  const [showThumb, setShowThumb] = useState(false);
+  const [showSelectTime, setShowSelectTime] = useState(false);
+  const [showChooseOptions, setShowChooseOptions] = useState(false);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
@@ -57,9 +59,28 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
         return currentTranslateTime;
       });
     } else if (keycode === keyboard.ENTER) {
-      // goBack();
+      if (product.orderType === EOrderType.selectTime) {
+        if (!showSelectTime) {
+          setShowSelectTime(true);
+        } else {
+          console.log("Continue showSelectTime");
+        }
+      }
+      if (product.orderType === EOrderType.chooseOptions) {
+        if (!showChooseOptions) {
+          setShowChooseOptions(true);
+        } else {
+          console.log("Continue showChooseOptions");
+        }
+      }
     } else if (keycode === keyboard.BACK) {
-      navigate(-1);
+      if (showSelectTime) {
+        setShowSelectTime(false);
+      } else if (showChooseOptions) {
+        setShowChooseOptions(false);
+      } else {
+        navigate(-1);
+      }
     }
   };
 
@@ -95,13 +116,10 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
       const { height: innerHeight } = innerRef.current.getBoundingClientRect();
       setHeightThumb(outerHeight);
       setHeightContent(innerHeight);
-      if (outerHeight < innerHeight) {
-        setShowThumb(true);
-        setHeightTrack((outerHeight / innerHeight) * outerHeight);
-      }
     }
   }, []);
 
+  const heightTrack = (heightThumb / heightContent) * heightThumb;
   const translateTrackY =
     translatePanelTime * (heightTrack / heightThumb) * stepScroll;
   const translatePanelY = translatePanelTime * stepScroll;
@@ -117,7 +135,9 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
           <div className="product-description-content" ref={outerRef}>
             <div
               className="product-description-scroller"
-              style={{ display: showThumb ? "block" : "none" }}
+              style={{
+                display: heightThumb < heightContent ? "block" : "none",
+              }}
             >
               <div
                 style={{
@@ -159,6 +179,9 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
             )}
           </div>
         </div>
+
+        <SelectTime isOpen={showSelectTime} />
+        <ChooseOptions isOpen={showChooseOptions} />
       </div>
     </div>
   );

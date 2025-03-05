@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { TCategoryItem } from "../components/CategoryList";
 import ProductDetails from "../components/ProductDetails";
-
-import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import LeftBottomButtons from "../components/LeftBottomButtons";
+import RightBottomButtons from "../components/RightBottomButtons";
 
 import { responseDining } from "../../_mock/dining";
 import { responseRestaurantsBars } from "../../_mock/restautantsBars";
@@ -31,6 +32,8 @@ function ProductPage({ identity }: TProductPageProps) {
     return (
       <div className="page product-page">
         <ProductDetails product={product} />
+        <LeftBottomButtons showNavigation={true} />
+        <RightBottomButtons />
       </div>
     );
   }
