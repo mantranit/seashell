@@ -14,10 +14,11 @@ type TProductDetailsProps = {
 };
 
 const stepScroll = 30;
-const points = ["orderQuatity", "orderType"];
+// const points = ["orderQuatity", "orderType"];
 
 const ProductDetails = ({ product }: TProductDetailsProps) => {
   const navigate = useNavigate();
+  const [points, setPoints] = useState<string[]>([]);
   const [defaultCursor, setDefaultCursor] = useState(points.length - 1);
   const [translatePanelTime, setTranslatePanelTime] = useState(0);
   const [heightContent, setHeightContent] = useState(452);
@@ -68,6 +69,24 @@ const ProductDetails = ({ product }: TProductDetailsProps) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   });
+
+  // active cursor
+  useEffect(() => {
+    if (product.orderQuantity) {
+      setPoints((currentPoints) => {
+        const nextPoints = [...currentPoints, "orderQuatity"];
+        setDefaultCursor(nextPoints.length - 1);
+        return nextPoints;
+      });
+    }
+    if (product.orderType) {
+      setPoints((currentPoints) => {
+        const nextPoints = [...currentPoints, "orderType"];
+        setDefaultCursor(nextPoints.length - 1);
+        return nextPoints;
+      });
+    }
+  }, []);
 
   // calculateScroller
   useEffect(() => {

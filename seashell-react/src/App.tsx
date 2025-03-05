@@ -3,26 +3,22 @@ import "./App.css";
 import MainLayout from "./app/layouts/main";
 import Welcome from "./app/pages/welcome";
 import Home from "./app/pages/home";
-import Settings from "./app/pages/settings";
+import ProductPage from "./app/pages/product";
+import CategoryPage from "./app/pages/category";
 import Television from "./app/pages/television";
 import Connectivity from "./app/pages/connectivity";
-import SpaFitness from "./app/pages/spa-fitness";
-import Shopping from "./app/pages/shopping";
 import MyOrders from "./app/pages/my-orders";
 import Movies from "./app/pages/movies";
 import Radio from "./app/pages/radio";
-import HotelInformation from "./app/pages/hotel-information";
-import RoomService from "./app/pages/room-service";
 import WakeUpCall from "./app/pages/wake-up-call";
 import Messages from "./app/pages/messages";
 import Feedback from "./app/pages/feedback";
 import CheckBill from "./app/pages/check-bill";
 import Flights from "./app/pages/flights";
+import Settings from "./app/pages/settings";
 
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import ProductPage from "./app/pages/product";
-import CategoryPage from "./app/pages/category";
 
 function App() {
   dayjs.extend(localizedFormat);
